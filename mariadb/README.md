@@ -16,13 +16,13 @@
 * `show databases;`
 
 ### Database Drop
-* `drop database if exists media;`
+* `drop database if exists <databasename>;`
 
 ### Database Create
 * `create database if not exists ``databasename`` default character set utf8mb4 collate utf8mb4_unicode_520_ci;`
   
 ### Database Connect
-* `use media;`
+* `use <databasename>;`
 
 ### Tables
 * `show tables;`
