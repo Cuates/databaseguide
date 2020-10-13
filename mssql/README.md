@@ -26,7 +26,7 @@
 * `create database [Databasename];`
   
 ### Database Connect
-* `use [Databasename]`
+* `use [Databasename];`
 
 ### Database Identity Cache
 * `alter database scoped configuration set identity_cache = on;`<br />
