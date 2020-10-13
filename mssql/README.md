@@ -4,6 +4,7 @@
 ## Table of Contents
 * [Version](#version)
 * [Databases](#databases)
+* [Database Drop](#database-drop)
 * [Database Create](#database-create)
 * [Database Connect](#database-connect)
 * [Database Identity Cache](#database-identity-cache)
@@ -16,14 +17,14 @@
 * `select`<br />
   `[name]`<br />
   `from sys.databases`
+  
+### Database Drop
+* `if db_id (N'Databasename') is not null`<br />
+  `drop database N'Databasename'`
 
 ### Database Create
 * `-- Database Create`<br />
   `use [master]`<br />
-  `go`<br />
-  `-- Database Check Existence`<br />
-  `if db_id (N'Databasename') is not null`<br />
-  `drop database N'Databasename'`<br />
   `go`<br />
   `create database [Databasename]`<br />
   `containment = none`<br />
