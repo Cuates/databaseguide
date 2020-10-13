@@ -23,7 +23,7 @@
   `go`<br />
   `-- Database Check Existence`<br />
   `if db_id (N'Databasename') is not null`<br />
-  `drop database N'Databasename'<br />
+  `drop database N'Databasename'`<br />
   `go`<br />
   `create database [Databasename]`<br />
   `containment = none`<br />
