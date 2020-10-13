@@ -31,17 +31,17 @@
   `(`<br />
   `name = N'Databasename',`<br />
   `filename = N'\path\to\mssql\data\folder',`<br />
-  `size = #####KB,`<br />
+  `size = \#\#\#\#\#KB,`<br />
   `maxsize = unlimited,`<br />
-  `filegrowth = #####KB`<br />
+  `filegrowth = \#\#\#\#\#KB`<br />
   `)`<br />
   `log on`<br />
   `(`<br />
   `name = N'Databasename_log',`<br />
   `filename = N'\path\to\mssql\data\folder',`<br />
-  `size = ######KB,`<br />
-  `maxsize = ####GB,`<br />
-  `filegrowth = #####KB`<br />
+  `size = \#\#\#\#\#\#KB,`<br />
+  `maxsize = \#\#\#\#GB,`<br />
+  `filegrowth = \#\#\#\#\#KB`<br />
   `)`<br />
   `with catalog_collation = database_default`<br />
   `go`
