@@ -15,7 +15,7 @@
 ### Databases
 * `show databases;`
 
-### Databas Drop
+### Database Drop
 * `drop database if exists media;`
 
 ### Database Create
