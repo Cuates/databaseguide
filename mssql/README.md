@@ -16,43 +16,21 @@
 ### Databases
 * `select`<br />
   `[name]`<br />
-  `from sys.databases`
+  `from sys.databases;`
   
 ### Database Drop
 * `if db_id (N'Databasename') is not null`<br />
   `drop database N'Databasename'`
 
 ### Database Create
-* `-- Database Create`<br />
-  `use [master]`<br />
-  `go`<br />
-  `create database [Databasename]`<br />
-  `containment = none`<br />
-  `on primary`<br />
-  `(`<br />
-  `name = N'Databasename',`<br />
-  `filename = N'\path\to\mssql\data\folder',`<br />
-  `size = #####KB,`<br />
-  `maxsize = unlimited,`<br />
-  `filegrowth = #####KB`<br />
-  `)`<br />
-  `log on`<br />
-  `(`<br />
-  `name = N'Databasename_log',`<br />
-  `filename = N'\path\to\mssql\data\folder',`<br />
-  `size = ######KB,`<br />
-  `maxsize = ####GB,`<br />
-  `filegrowth = #####KB`<br />
-  `)`<br />
-  `with catalog_collation = database_default`<br />
-  `go`
+* `create database [Databasename];`
   
 ### Database Connect
 * `use [Databasename]`
 
 ### Database Identity Cache
-* `alter database scoped configuration set identity_cache = on`<br />
-  `alter database scoped configuration set identity_cache = off`
+* `alter database scoped configuration set identity_cache = on;`<br />
+  `alter database scoped configuration set identity_cache = off;`
   
 ### Tables
 * `select`<br />
