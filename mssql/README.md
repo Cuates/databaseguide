@@ -50,9 +50,7 @@
 * `use [Databasename]`
 
 ### Database Identity Cache
-* -- Identity cache enabled -- This will make identity cache 1000 by default for faster performance<br />
-  `alter database scoped configuration set identity_cache = on`<br />
-  -- Identity cache disabled -- This will make identity not jump by 1,000 and so on<br />
+* `alter database scoped configuration set identity_cache = on`<br />
   `alter database scoped configuration set identity_cache = off`
   
 ### Tables
