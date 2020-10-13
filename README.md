@@ -15,10 +15,10 @@
 * N/A
 
 ### MSSQL
-* [MSSQL](#)
+* [MSSQL](https://github.com/Cuates/databaseguide/tree/main/mssql)
 
 ### PostgreSQL
-* [PostgreSQL](#)
+* [PostgreSQL](https://github.com/Cuates/databaseguide/tree/main/postgresql)
 
 ### MariaDB
-* [MariaDB](#)
+* [MariaDB](https://github.com/Cuates/databaseguide/tree/main/mariadb)
