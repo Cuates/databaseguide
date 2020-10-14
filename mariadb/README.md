@@ -19,7 +19,7 @@
 * `drop database if exists <databasename>;`
 
 ### Database Create
-* `create database if not exists ``databasename`` default character set utf8mb4 collate utf8mb4_unicode_520_ci;`
+* `create database if not exists \`databasename\` default character set utf8mb4 collate utf8mb4_unicode_520_ci;`
   
 ### Database Connect
 * `use <databasename>;`
