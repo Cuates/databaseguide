@@ -13,7 +13,7 @@
 * 0.0.1
 
 ### Databases
-* `\l`
+* `select datname from pg_database;`
 
 ### Database Drop
 * `drop database if exists <databasename>;`
@@ -25,4 +25,8 @@
 * `\c <databasename>;`
 
 ### Tables
-* `select datname from pg_database;`
+* `select`<br />
+  `*`<br />
+  `from pg_catalog.pg_tables`<br />
+  `where`<br />
+  `schemaname = 'public';`
