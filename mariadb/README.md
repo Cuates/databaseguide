@@ -8,11 +8,11 @@
 * [Database Create](#database-create)
 * [Database Connect](#database-connect)
 * [Tables](#tables)
+* [Table Drop](#table-drop)
 * [Table Create](#table-create)
 * [Table Creation](#table-creation)
 * [Table Columns](#table-columns)
 * [Table Indexes](#table-indexes)
-* [Table Drop](#table-drop)
 * [Table Select](#table-select)
 * [Table Insert](#table-insert)
 * [Table Update](#table-update)
@@ -39,6 +39,9 @@
 ### Tables
 * `show tables;`
 
+### Table Drop
+* `drop table if exists <tablename>;`
+
 ### Table Create
 * <pre>
     create table if not exists &lt;tablename&gt;(
@@ -63,9 +66,6 @@
 
 ### Table Indexes
 * `show index from <tablename>;`
-
-### Table Drop
-* `drop table if exists <tablename>;`
 
 ### Table Select
 * `select tableID, columnOne, columnTwo, columnThree, columnFour, columnFive, columnSix from <tablename>;`
