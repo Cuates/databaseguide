@@ -14,13 +14,17 @@
 * 0.0.1
 
 ### Databases
-* `select`<br />
-  `[name]`<br />
-  `from sys.databases;`
+* <pre>
+    select
+    [name]
+    from sys.databases;
+  </pre>
   
 ### Database Drop
-* `if db_id (N'Databasename') is not null`<br />
-  `drop database N'Databasename'`
+* <pre>
+    if db_id (N'Databasename') is not null
+      drop database N'Databasename'
+  </pre>
 
 ### Database Create
 * `create database [Databasename];`
@@ -33,8 +37,10 @@
   `alter database scoped configuration set identity_cache = off;`
   
 ### Tables
-* `select`<br />
-  `*`<br />
-  `from media.information_schema.tables`<br />
-  `where`<br />
-  `table_type = 'BASE TABLE';`
+* <pre>
+    select
+    *
+    from media.information_schema.tables
+    where
+    table_type = 'BASE TABLE';
+  </pre>
