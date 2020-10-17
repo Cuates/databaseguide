@@ -41,18 +41,18 @@
 
 ### Table Create
 * <pre>
-  `create table if not exists <tablename>(`<br />
-  `` `tableID` bigint(20) unsigned not null auto_increment, ``<br />
-  `` `columnOne` int(11) not null, ``<br />
-  `` `columnTwo` varchar(255) collate utf8mb4_unicode_520_ci not null, ``<br />
-  `` `columnThree` text collate utf8mb4_unicode_520_ci default null, ``<br />
-  `` `columnFour` bit(1) not null default b'0', ``<br />
-  `` `columnFive` datetime not null default current_timestamp(), ``<br />
-  `` `columnSix` datetime default current_timestamp(), ``<br />
-  `` primary key (`tableID`), ``<br />
-  `` unique key `UQ_<tablename>_columnOne` (`columnOne`), ``<br />
-  `` index `IX_<tablename>_columnTwo` (`columnTwo`) ``<br />
-  `) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;`
+    create table if not exists <tablename>(
+      `tableID` bigint(20) unsigned not null auto_increment,
+      `columnOne` int(11) not null,
+      `columnTwo` varchar(255) collate utf8mb4_unicode_520_ci not null,
+      `columnThree` text collate utf8mb4_unicode_520_ci default null,
+      `columnFour` bit(1) not null default b'0',
+      `columnFive` datetime not null default current_timestamp(),
+      `columnSix` datetime default current_timestamp(),
+      primary key (`tableID`),
+      unique key `UQ_<tablename>_columnOne` (`columnOne`),
+      index `IX_<tablename>_columnTwo` (`columnTwo`)
+    ) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;
   </pre>
 
 ### Table Creation
