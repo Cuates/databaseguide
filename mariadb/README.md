@@ -50,8 +50,8 @@
       `columnFive` datetime not null default current_timestamp(),
       `columnSix` datetime default current_timestamp(),
       primary key (`tableID`),
-      unique key `UQ_<tablename>_columnOne` (`columnOne`),
-      index `IX_<tablename>_columnTwo` (`columnTwo`)
+      unique key `UQ\_<tablename>\_columnOne` (`columnOne`),
+      index `IX\_<tablename>\_columnTwo` (`columnTwo`)
     ) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;
   </pre>
 
