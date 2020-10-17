@@ -41,7 +41,7 @@
 
 ### Table Create
 * <pre>
-    `create table if not exists &gt;tablename&lt;(`
+    `create table if not exists &lt;tablename&gt;(`
     `` `tableID` bigint(20) unsigned not null auto_increment, ``
     `` `columnOne` int(11) not null, ``
     `` `columnTwo` varchar(255) collate utf8mb4_unicode_520_ci not null, ``
@@ -50,8 +50,8 @@
     `` `columnFive` datetime not null default current_timestamp(), ``
     `` `columnSix` datetime default current_timestamp(), ``
     `` primary key (`tableID`), ``
-    `` unique key `UQ_&gt;tablename&lt;_columnOne` (`columnOne`), ``
-    `` index `IX_&gt;tablename&lt;_columnTwo` (`columnTwo`) ``
+    `` unique key `UQ_&lt;tablename&gt;_columnOne` (`columnOne`), ``
+    `` index `IX_&lt;tablename&gt;_columnTwo` (`columnTwo`) ``
     `) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;`
   </pre>
 
