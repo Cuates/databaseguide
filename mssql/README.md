@@ -17,7 +17,7 @@
 * <pre>
     select
     [name]
-    from sys.databases;
+    from sys.databases
   </pre>
   
 ### Database Drop
@@ -30,11 +30,11 @@
 * `create database [Databasename];`
   
 ### Database Connect
-* `use [Databasename];`
+* `use [Databasename]`
 
 ### Database Identity Cache
-* `alter database scoped configuration set identity_cache = on;`<br />
-  `alter database scoped configuration set identity_cache = off;`
+* `alter database scoped configuration set identity_cache = on`<br />
+  `alter database scoped configuration set identity_cache = off`
   
 ### Tables
 * <pre>
@@ -42,5 +42,5 @@
     *
     from media.information_schema.tables
     where
-    table_type = 'BASE TABLE';
+    table_type = 'BASE TABLE'
   </pre>
