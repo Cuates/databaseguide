@@ -8,9 +8,9 @@
 * [Database Create](#database-create)
 * [Database Connect](#database-connect)
 * [Tables](#tables)
+* [Table Drop](#table-drop)
 * [Table Create](#table-create)
 * [Table Columns](#table-columns)
-* [Table Drop](#table-drop)
 * [Table Select](#table-select)
 * [Table Insert](#table-insert)
 * [Table Update](#table-update)
@@ -46,6 +46,9 @@
     where
     schemaname = 'public';
   </pre>
+
+### Table Drop
+* `drop table if exists <tablename>;`
 
 ### Table Create
 * <pre>
