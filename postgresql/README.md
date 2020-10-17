@@ -33,10 +33,10 @@
 * `drop database if exists <databasename>;`
 
 ### Database Create
-* `create database <databasename>;`
+* `create database <databasename>;` **NOTE Does not have 'if exists' when creating databases**
   
 ### Database Connect
-* `\c <databasename>;` **NOTE Does not have 'if exists' when creating databases**
+* `\c <databasename>;`
 
 ### Tables
 * <pre>
