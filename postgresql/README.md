@@ -13,7 +13,11 @@
 * 0.0.1
 
 ### Databases
-* `select datname from pg_database;`
+* <pre>
+    select
+    datname
+    from pg_database;
+  </pre>
 
 ### Database Drop
 * `drop database if exists <databasename>;`
@@ -22,11 +26,13 @@
 * `create database <databasename>;`
   
 ### Database Connect
-* `\c <databasename>;`
+* `\c <databasename>;` **NOTE Does not have 'if exists' when creating databases**
 
 ### Tables
-* `select`<br />
-  `*`<br />
-  `from pg_catalog.pg_tables`<br />
-  `where`<br />
-  `schemaname = 'public';`
+* <pre>
+    select
+    tablename
+    from pg_catalog.pg_tables
+    where
+    schemaname = 'public';
+  </pre>
