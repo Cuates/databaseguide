@@ -68,16 +68,36 @@
 * `show index from <tablename>;`
 
 ### Table Select
-* `select tableID, columnOne, columnTwo, columnThree, columnFour, columnFive, columnSix from <tablename>;`
+* <pre>
+    select
+    tableID,
+    columnOne,
+    columnTwo,
+    columnThree,
+    columnFour,
+    columnFive,
+    columnSix
+    from &lt;tablename&gt;;
+  </pre>
 
 ### Table Insert
 * `insert into <tablename> (columnOne, columnTwo, columnThree, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, current_timestamp(), current_timestamp());`
 
 ### Table Update
-* `update <tablename> set columnFour = 1 where columnFour = 0;`
+* <pre>
+    update &lt;tablename&gt;
+    set
+    columnFour = 1
+    where
+    columnFour = 0;
+  </pre>
 
 ### Table Delete
-* `delete from <tablename> where tableID = 1;`
+* <pre>
+    delete from &lt;tablename&gt;
+    where
+    tableID = 1;
+  </pre>
 
 ### Table Truncate
 * `truncate table <tablename>;`
