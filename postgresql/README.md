@@ -112,7 +112,7 @@
 * **NOTE Need to be user owner of the table**
 * `truncate table <tablename> restart identity;`
 
-## Functions and Procedures
+### Functions and Procedures
 * **NOTE Stored Procedures are new; Before it was Functions only**
 * User Defined Functions Universal
   * <pre>
