@@ -40,7 +40,8 @@
 * `show tables;`
 
 ### Table Create
-* `create table if not exists <tablename>(`<br />
+* <pre>
+  `create table if not exists <tablename>(`<br />
   `` `tableID` bigint(20) unsigned not null auto_increment, ``<br />
   `` `columnOne` int(11) not null, ``<br />
   `` `columnTwo` varchar(255) collate utf8mb4_unicode_520_ci not null, ``<br />
@@ -51,7 +52,8 @@
   `` primary key (`tableID`), ``<br />
   `` unique key `UQ_<tablename>_columnOne` (`columnOne`), ``<br />
   `` index `IX_<tablename>_columnTwo` (`columnTwo`) ``<br />
-  `) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;`<br />
+  `) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;`
+  </pre>
 
 ### Table Creation
 * `show create table <tablename>;`
