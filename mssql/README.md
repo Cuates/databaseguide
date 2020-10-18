@@ -9,6 +9,8 @@
 * [Database Connect](#database-connect)
 * [Database Identity Cache](#database-identity-cache)
 * [Tables](#tables)
+* [Table Drop](#table-drop)
+* [Table Create](#table-create)
 
 ### Version
 * 0.0.1
@@ -68,3 +70,29 @@
     end
   </pre>
 
+### Table Create
+* <pre>
+  create table [&lt;table_schema&gt;].[&lt;Tablename&gt;](
+    [tableID] [bigint] identity(1, 1) not null,
+    [columnOne] [int] not null,
+    [columnTwo] [nvarchar](255) not null,
+    [columnThree] [text] null,
+    [columnFour] [bit] not null,
+    [columnFive] [datetime2](6) not null,
+    [columnSix] [datetime2](6) null
+    constraint [PK_&lt;Tablename&gt;_columnOne] primary key clustered
+    (
+      [columnOne] asc
+    ) with (pad_index = off, statistics_norecompute = off, ignore_dup_key = off, allow_row_locks = on, allow_page_locks = on, fillfactor = 90, optimize_for_sequential_key = off) on [primary]
+  ) on [primary]
+  go
+
+  alter table [&lt;table_schema&gt;].[&lt;Tablename&gt;] add  default ((0)) for [columnFour]
+  go
+
+  alter table [&lt;table_schema&gt;].[&lt;Tablename&gt;] add  default (getdate()) for [columnFive]
+  go
+
+  alter table [&lt;table_schema&gt;].[&lt;Tablename&gt;] add  default (getdate()) for [columnSix]
+  go
+  </pre>
