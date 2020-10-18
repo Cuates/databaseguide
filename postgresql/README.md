@@ -66,11 +66,11 @@
 
 ### Table Columns
 * <pre>
-    select
-    *
-    from information_schema.columns
-    where
-    table_name = '&lt;tablename&gt;';
+  select
+  *
+  from information_schema.columns
+  where
+  table_name = '&lt;tablename&gt;';
   </pre>
 
 ### Table Select
@@ -87,9 +87,7 @@
   </pre>
 
 ### Table Insert
-* <pre>
-  insert into &lt;tablename&gt; (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, current_timestamp, current_timestamp);
-  </pre>
+* `insert into <tablename> (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, current_timestamp, current_timestamp);`
 
 ### Table Update
 * <pre>
