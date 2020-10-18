@@ -67,10 +67,25 @@
 ### Table Columns
 * <pre>
   select
-  *
-  from information_schema.columns
+  col.table_schema as "table_schema",
+  col.table_name as "table_name",
+  col.ordinal_position as "position",
+  col.column_name as "column_name",
+  col.data_type as "data_type",
+  case
+    when col.character_maximum_length is not null
+      then
+        col.character_maximum_length
+    else
+      col.numeric_precision
+  end as "max_length",
+  col.is_nullable as "is_nullable",
+  col.column_default as "default_value"
+  from information_schema.columns col
   where
-  table_name = '&lt;tablename&gt;';
+  col.table_name in ('&lt;tablename&gt;') and
+  col.table_schema in ('&lt;table_schema&gt;')
+  order by col.table_name asc, col.ordinal_position asc;
   </pre>
 
 ### Table Select
