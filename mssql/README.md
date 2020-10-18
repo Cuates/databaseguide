@@ -17,7 +17,8 @@
 * [Table Update](#table-update)
 * [Table Delete](#table-delete)
 * [Table Truncate](#table-truncate)
-* [Functions And Procedures](#functions-and-procedures)
+* [Functions](#functions)
+* [Procedures](#procedures)
 
 ### Version
 * 0.0.1
@@ -149,27 +150,52 @@
 ### Table Truncate
 * `truncate table <table_schema>.<Tablename>`
 
-### Functions And Procedures
+### Functions
 * <pre>
   select
-  so.type_desc as [object Type (UDF/SP)],
-  schema_name(so.schema_id) as [Schema Name],
-  so.[name] as [Object Name],
-  p.parameter_id as [Parameter ID],
-  p.[name] as [Parameter Name],
-  type_name(p.user_type_id) as [parameterdatatype],
-  p.max_length as [parametermaxbytes],
-  p.is_output as [isoutputparameter]
-  from sys.objects as so
-  inner join sys.parameters as p on so.object_id = p.object_id
-  where
-  so.object_id in
+  obj.type_desc as [type],
+  schema_name(obj.schema_id) as [schema_name],
+  obj.[name] as [object_name],
+  substring(par.parameters, 0, len(par.parameters)) as [parameters],
+  mod.definition as [definition]
+  from sys.objects obj
+  join sys.sql_modules mod on mod.object_id = obj.object_id
+  cross apply
   (
     select
-    soi.object_id as [object_id]
-    from sys.objects soi
+    p.[name] + ' ' + type_name(p.user_type_id) + ', ' 
+    from sys.parameters p
     where
-    soi.[type] in ('fn','p')
-  )
-  order by schema_name(so.schema_id) asc, so.[name] asc, p.parameter_id asc
+    p.object_id = obj.object_id and
+    p.parameter_id <> 0 
+    for xml path ('')
+  ) par (parameters)
+  where
+  obj.type in ('FN')
+  order by schema_name(obj.schema_id) asc, obj.[name] asc;
+  </pre>
+
+### Procedures
+* <pre>
+  select
+  obj.type_desc as [type],
+  schema_name(obj.schema_id) as [schema_name],
+  obj.[name] as [object_name],
+  substring(par.parameters, 0, len(par.parameters)) as [parameters],
+  mod.definition as [definition]
+  from sys.objects obj
+  join sys.sql_modules mod on mod.object_id = obj.object_id
+  cross apply
+  (
+    select
+    p.[name] + ' ' + type_name(p.user_type_id) + ', ' 
+    from sys.parameters p
+    where
+    p.object_id = obj.object_id and
+    p.parameter_id <> 0 
+    for xml path ('')
+  ) par (parameters)
+  where
+  obj.type in ('P', 'X')
+  order by schema_name(obj.schema_id) asc, obj.[name] asc;
   </pre>
