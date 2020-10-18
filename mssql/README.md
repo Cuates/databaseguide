@@ -17,8 +17,7 @@
 * [Table Update](#table-update)
 * [Table Delete](#table-delete)
 * [Table Truncate](#table-truncate)
-* [Functions](#functions)
-* [Procedures](#procedures)
+* [Functions And Procedures](#functions-and-procedures)
 
 ### Version
 * 0.0.1
@@ -150,8 +149,27 @@
 ### Table Truncate
 * `truncate table <table_schema>.<Tablename>`
 
-### Functions
-*
-
-### Procedures
-*
+### Functions And Procedures
+* <pre>
+  select
+  so.type_desc as [object Type (UDF/SP)],
+  schema_name(so.schema_id) as [Schema Name],
+  so.[name] as [Object Name],
+  p.parameter_id as [Parameter ID],
+  p.[name] as [Parameter Name],
+  type_name(p.user_type_id) as [parameterdatatype],
+  p.max_length as [parametermaxbytes],
+  p.is_output as [isoutputparameter]
+  from sys.objects as so
+  inner join sys.parameters as p on so.object_id = p.object_id
+  where
+  so.object_id in
+  (
+    select
+    soi.object_id as [object_id]
+    from sys.objects soi
+    where
+    soi.[type] in ('fn','p')
+  )
+  order by schema_name(so.schema_id) asc, so.[name] asc, p.parameter_id asc
+  </pre>
