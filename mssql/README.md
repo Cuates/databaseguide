@@ -115,19 +115,40 @@
   </pre>
 
 ### Table Select
-*
+* <pre>
+  select
+  tableID as [tableID],
+  columnOne as [columnOne],
+  columnTwo as [columnTwo],
+  columnThree as [columnThree],
+  columnFour as [columnFour],
+  columnFive as [columnFive],
+  columnSix as [columnSix]
+  from &lt;table_schema&gt;.&lt;tablename&gt;
+  </pre>
 
 ### Table Insert
-*
+* `insert into &lt;table_schema&gt;.&lt;tablename&gt; (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, datetime2(6), datetime2(6))`
 
 ### Table Update
-*
+* <pre>
+  update &lt;table_schema&gt;.&lt;tablename&gt;
+  set
+  columnFour = 1,
+  columnSix = getdate()
+  where
+  columnFour = 0
+  </pre>
 
 ### Table Delete
-*
+* <pre>
+  delete from &lt;table_schema&gt;.&lt;tablename&gt;
+  where
+  tableID = 1
+  </pre>
 
 ### Table Truncate
-*
+* `truncate table &lt;table_schema&gt;.&lt;tablename&gt;`
 
 ### Functions
 *
