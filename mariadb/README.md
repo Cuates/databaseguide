@@ -37,7 +37,16 @@
 * `use <databasename>;`
 
 ### Tables
-* `show tables;`
+* <pre>
+  select
+  tab.table_schema as `table_schema`,
+  tab.table_name as `table_name`
+  from information_schema.tables tab
+  where
+  tab.table_type in ('BASE TABLE') and
+  tab.table_schema not in ('information_schema', 'mysql', 'performance_schema','sys')
+  order by tab.table_schema asc, tab.table_name asc;
+  </pre>
 
 ### Table Drop
 * `drop table if exists <tablename>;`
