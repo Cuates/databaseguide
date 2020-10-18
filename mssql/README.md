@@ -11,6 +11,14 @@
 * [Tables](#tables)
 * [Table Drop](#table-drop)
 * [Table Create](#table-create)
+* [Table Columns](#table-columns)
+* [Table Select](#table-select)
+* [Table Insert](#table-insert)
+* [Table Update](#table-update)
+* [Table Delete](#table-delete)
+* [Table Truncate](#table-truncate)
+* [Functions](#functions)
+* [Procedures](#procedures)
 
 ### Version
 * 0.0.1
@@ -96,3 +104,33 @@
   alter table [&lt;table_schema&gt;].[&lt;Tablename&gt;] add  default (getdate()) for [columnSix]
   go
   </pre>
+
+### Table Columns
+* <pre>
+  select
+  *
+  from &lt;Databasename&gt;.information_schema.columns
+  where
+  table_name = '&lt;Tablename&gt;'
+  </pre>
+
+### Table Select
+*
+
+### Table Insert
+*
+
+### Table Update
+*
+
+### Table Delete
+*
+
+### Table Truncate
+*
+
+### Functions
+*
+
+### Procedures
+*
