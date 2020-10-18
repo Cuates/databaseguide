@@ -62,7 +62,23 @@
 * `show create table <tablename>;`
 
 ### Table Columns
-* `show columns in <tablename>;`
+* <pre>
+  select
+  col.table_schema as `table_schema`,
+  col.table_name as `table_name`,
+  col.ordinal_position as `position`,
+  col.column_name as `column_name`,
+  col.data_type as `data_type`,
+  if(col.character_maximum_length is not null, col.character_maximum_length, col.numeric_precision) as `max_length`,
+  if(col.datetime_precision is not null, col.datetime_precision, if(col.numeric_scale is not null, col.numeric_scale, 0)) as `data_precision`,
+  col.is_nullable as `is_nullable`,
+  col.column_default as `column_default`
+  from information_schema.columns col
+  where
+  col.table_name in ('&lt;tablename&gt;') and
+  col.table_schema in ('&lt;table_schema&gt;')
+  order by col.table_name asc, col.ordinal_position asc;
+  </pre>
 
 ### Table Indexes
 * `show index from <tablename>;`
