@@ -15,15 +15,17 @@
 
 ### Databases
 * <pre>
-    select
-    [name]
-    from sys.databases
+  select
+  [name] as [Database Name]
+  from sys.databases
   </pre>
   
 ### Database Drop
 * <pre>
-    if db_id (N'Databasename') is not null
+  if db_id (N'&lt;Databasename&gt;') is not null
+    begin
       drop database N'Databasename'
+    end
   </pre>
 
 ### Database Create
@@ -38,9 +40,25 @@
   
 ### Tables
 * <pre>
-    select
-    *
-    from media.information_schema.tables
-    where
-    table_type = 'BASE TABLE'
+  select
+  *
+  from &lt;Databasename&gt;.information_schema.tables
+  where
+  table_type = 'BASE TABLE'
   </pre>
+
+### Table Drop
+* <pre>
+  if exists
+  (
+    select
+    table_name as [table_name]
+    from &lt;Databasename&gt;.information_schema.tables
+    where
+    table_name = '&lt;Tablename&gt;'
+  )
+    begin
+      drop table &lt;table_schema&gt;.&lt;Tablename&gt;
+    end
+  </pre>
+
