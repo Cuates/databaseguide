@@ -124,15 +124,15 @@
   columnFour as [columnFour],
   columnFive as [columnFive],
   columnSix as [columnSix]
-  from &lt;table_schema&gt;.&lt;tablename&gt;
+  from &lt;table_schema&gt;.&lt;Tablename&gt;
   </pre>
 
 ### Table Insert
-* `insert into &lt;table_schema&gt;.&lt;tablename&gt; (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, datetime2(6), datetime2(6))`
+* `insert into <table_schema>;.<Tablename> (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, getdate(), getdate())`
 
 ### Table Update
 * <pre>
-  update &lt;table_schema&gt;.&lt;tablename&gt;
+  update &lt;table_schema&gt;.&lt;Tablename&gt;
   set
   columnFour = 1,
   columnSix = getdate()
@@ -142,13 +142,13 @@
 
 ### Table Delete
 * <pre>
-  delete from &lt;table_schema&gt;.&lt;tablename&gt;
+  delete from &lt;table_schema&gt;.&lt;Tablename&gt;
   where
   tableID = 1
   </pre>
 
 ### Table Truncate
-* `truncate table &lt;table_schema&gt;.&lt;tablename&gt;`
+* `truncate table <table_schema>.<Tablename>`
 
 ### Functions
 *
