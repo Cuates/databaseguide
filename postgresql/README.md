@@ -76,13 +76,13 @@
 ### Table Select
 * <pre>
   select
-  tableID,
-  columnOne,
-  columnTwo,
-  columnThree,
-  columnFour,
-  columnFive,
-  columnSix
+  tableID as "tableID",
+  columnOne as "columnOne",
+  columnTwo as "columnTwo",
+  columnThree as "columnThree",
+  columnFour as "columnFour",
+  columnFive as "columnFive",
+  columnSix as "columnSix"
   from &lt;tablename&gt;;
   </pre>
 
@@ -93,7 +93,8 @@
 * <pre>
   update &lt;tablename&gt;
   set
-  columnFour = 1
+  columnFour = 1,
+  columnSix = current_timestamp
   where
   columnFour = 0;
   </pre>
