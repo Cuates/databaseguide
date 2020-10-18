@@ -18,8 +18,8 @@
 * [Table Update](#table-update)
 * [Table Delete](#table-delete)
 * [Table Truncate](#table-truncate)
-* [Procedures](#procedures)
 * [Functions](#functions)
+* [Procedures](#procedures)
 
 ### Version
 * 0.0.1
@@ -103,8 +103,8 @@
 ### Table Truncate
 * `truncate table <tablename>;`
 
-### Procedures
-* `show procedure status;`
-
 ### Functions
 * `show function status;`
+
+### Procedures
+* `show procedure status;`
