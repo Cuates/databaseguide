@@ -44,18 +44,18 @@
 
 ### Table Create
 * <pre>
-    create table if not exists &lt;tablename&gt;(
-      `tableID` bigint(20) unsigned not null auto_increment,
-      `columnOne` int(11) not null,
-      `columnTwo` varchar(255) collate utf8mb4_unicode_520_ci not null,
-      `columnThree` text collate utf8mb4_unicode_520_ci default null,
-      `columnFour` bit(1) not null default b'0',
-      `columnFive` datetime not null default current_timestamp(),
-      `columnSix` datetime default current_timestamp(),
-      primary key (`tableID`),
-      unique key `UQ_&lt;tablename&gt;_columnOne` (`columnOne`),
-      index `IX_&lt;tablename&gt;_columnTwo` (`columnTwo`)
-    ) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;
+  create table if not exists &lt;tablename&gt;(
+    `tableID` bigint(20) unsigned not null auto_increment,
+    `columnOne` int(11) not null,
+    `columnTwo` varchar(255) collate utf8mb4_unicode_520_ci not null,
+    `columnThree` text collate utf8mb4_unicode_520_ci default null,
+    `columnFour` bit(1) not null default b'0',
+    `columnFive` datetime(6) not null default current_timestamp(),
+    `columnSix` datetime(6) default current_timestamp(),
+    primary key (`tableID`),
+    unique key `UQ_&lt;tablename&gt;_columnOne` (`columnOne`),
+    index `IX_&lt;tablename&gt;_columnTwo` (`columnTwo`)
+  ) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;
   </pre>
 
 ### Table Creation
@@ -69,34 +69,35 @@
 
 ### Table Select
 * <pre>
-    select
-    tableID,
-    columnOne,
-    columnTwo,
-    columnThree,
-    columnFour,
-    columnFive,
-    columnSix
-    from &lt;tablename&gt;;
+  select
+  tableID as `tableID`,
+  columnOne as `columnOne`,
+  columnTwo as `columnTwo`,
+  columnThree as `columnThree`,
+  columnFour as `columnFour`,
+  columnFive as `columnFive`,
+  columnSix as `columnSix`
+  from &lt;tablename&gt;;
   </pre>
 
 ### Table Insert
-* `insert into <tablename> (columnOne, columnTwo, columnThree, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, current_timestamp(), current_timestamp());`
+* `insert into <tablename> (columnOne, columnTwo, columnThree, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, current_timestamp(6), current_timestamp(6));`
 
 ### Table Update
 * <pre>
-    update &lt;tablename&gt;
-    set
-    columnFour = 1
-    where
-    columnFour = 0;
+  update &lt;tablename&gt;
+  set
+  columnFour = 1,
+  columnSix = current_timestamp(6)
+  where
+  columnFour = 0;
   </pre>
 
 ### Table Delete
 * <pre>
-    delete from &lt;tablename&gt;
-    where
-    tableID = 1;
+  delete from &lt;tablename&gt;
+  where
+  tableID = 1;
   </pre>
 
 ### Table Truncate
