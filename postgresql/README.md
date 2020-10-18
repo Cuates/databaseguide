@@ -110,7 +110,7 @@
 * `truncate table <tablename>;`
 
 ### Table Truncate And Reseed Identity
-* **NOTE Need to be user owner of the table**
+* **NOTE Need to be owner user of the table**
 * `truncate table <tablename> restart identity;`
 
 ### Functions and Procedures
