@@ -51,13 +51,13 @@
 ### Tables
 * <pre>
   select
-  table_catalog as [table_catalog],
-  table_schema as [table_schema],
-  table_name as [table_name],
-  table_type as [table_type]
-  from &lt;Databasename&gt;.information_schema.tables
+  sch.[name] as [table_schema],
+  tab.[name] as [table_name]
+  from sys.tables tab
+  inner join sys.schemas sch on sch.schema_id = tab.schema_id
   where
-  table_type = 'BASE TABLE'
+  tab.[type] in ('U')
+  order by sch.[name] asc, tab.[name] asc
   </pre>
 
 ### Table Drop
@@ -65,13 +65,14 @@
   if exists
   (
     select
-    table_catalog as [table_catalog],
-    table_schema as [table_schema],
-    table_name as [table_name],
-    table_type as [table_type]
-    from &lt;Databasename&gt;.information_schema.tables
+    sch.[name] as [table_schema],
+    tab.[name] as [table_name]
+    from sys.tables tab
+    inner join sys.schemas sch on sch.schema_id = tab.schema_id
     where
-    table_name = '&lt;Tablename&gt;'
+    tab.[type] in ('U') and
+    tab.[name] = '&lt;Tablename&gt;'
+    order by sch.[name] asc, tab.[name] asc
   )
     begin
       drop table &lt;table_schema&gt;.&lt;Tablename&gt;
@@ -108,10 +109,22 @@
 ### Table Columns
 * <pre>
   select
-  *
-  from &lt;Databasename&gt;.information_schema.columns
+  sch.[name] as [schema_name],
+  tab.[name] as [table_name],
+  col.column_id as [id],
+  col.[name] as [column_name],
+  typ.[name] as [data_type],
+  col.max_length as [max_length],
+  col.precision as [precision],
+  col.is_nullable as [is_nullable]
+  from sys.tables as tab
+  inner join sys.columns as col on col.object_id = tab.object_id
+  left join sys.types as typ on col.user_type_id = typ.user_type_id
+  inner join sys.schemas sch on sch.schema_id = tab.schema_id
   where
-  table_name = '&lt;Tablename&gt;'
+  tab.[name] in ('&lt;Tablename&gt;') and
+  sch.[name] in ('&lt;table_schema&gt;')
+  order by tab.[name] asc, col.column_id asc
   </pre>
 
 ### Table Select
