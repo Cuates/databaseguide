@@ -41,7 +41,10 @@
 ### Tables
 * <pre>
   select
-  *
+  table_catalog as [table_catalog],
+  table_schema as [table_schema],
+  table_name as [table_name],
+  table_type as [table_type]
   from &lt;Databasename&gt;.information_schema.tables
   where
   table_type = 'BASE TABLE'
@@ -52,7 +55,10 @@
   if exists
   (
     select
-    table_name as [table_name]
+    table_catalog as [table_catalog],
+    table_schema as [table_schema],
+    table_name as [table_name],
+    table_type as [table_type]
     from &lt;Databasename&gt;.information_schema.tables
     where
     table_name = '&lt;Tablename&gt;'
