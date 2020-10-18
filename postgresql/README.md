@@ -25,7 +25,7 @@
 ### Databases
 * <pre>
   select
-  datname
+  datname as "Database Name"
   from pg_database;
   </pre>
 
@@ -41,7 +41,7 @@
 ### Tables
 * <pre>
   select
-  tablename
+  tablename as "Table Name"
   from pg_catalog.pg_tables
   where
   schemaname = 'public';
@@ -118,18 +118,18 @@
 * User Defined Functions Universal
   * <pre>
     select
-    n.nspname as function_schema,
-    p.proname as function_name,
-    l.lanname as function_language,
+    n.nspname as "function_schema",
+    p.proname as "function_name",
+    l.lanname as "function_language",
     case
       when l.lanname = 'internal'
         then
           p.prosrc
       else
         pg_get_functiondef(p.oid)
-    end as definition,
-    pg_get_function_arguments(p.oid) as function_arguments,
-    t.typname as return_type
+    end as "definition",
+    pg_get_function_arguments(p.oid) as "function_arguments",
+    t.typname as "return_type"
     from pg_proc p
     left join pg_namespace n on p.pronamespace = n.oid
     left join pg_language l on p.prolang = l.oid
@@ -141,8 +141,8 @@
 * User Defined Functions 11+
   * <pre>
     select
-    n.nspname as schema_name,
-    p.proname as specific_name,
+    n.nspname as "schema_name",
+    p.proname as "specific_name",
     case p.prokind
       when 'f'
         then
@@ -156,17 +156,17 @@
       when 'w'
         then
           'WINDOW'
-    end as kind,
-    l.lanname as language,
+    end as "kind",
+    l.lanname as "language",
     case
       when l.lanname = 'internal'
         then
           p.prosrc
       else
         pg_get_functiondef(p.oid)
-    end as definition,
-    pg_get_function_arguments(p.oid) as arguments,
-    t.typname as return_type
+    end as "definition",
+    pg_get_function_arguments(p.oid) as "arguments",
+    t.typname as "return_type"
     from pg_proc p
     left join pg_namespace n on p.pronamespace = n.oid
     left join pg_language l on p.prolang = l.oid
