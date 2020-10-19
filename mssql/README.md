@@ -86,8 +86,8 @@
 * `use [Databasename];`
 
 ### Database Identity Cache
-* `alter database scoped configuration set identity_cache = on;`<br />
-  `alter database scoped configuration set identity_cache = off;`
+* `alter database scoped configuration set identity_cache = on; -- Pre allocate record ids`<br />
+  `alter database scoped configuration set identity_cache = off; -- Do not pre allocate record ids`
   
 ### Tables
 * <pre>
