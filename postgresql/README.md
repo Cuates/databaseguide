@@ -53,6 +53,10 @@
 
 ### Table Create
 * <pre>
+  -- Sequence Create
+  create sequence &lt;tablename&gt;_&lt;tableID&gt;_seq;
+  
+  -- Table Create
   create table if not exists &lt;tablename&gt;(
     tableID bigint not null default nextval('&lt;tablename&gt;_&lt;tableID&gt;_seq'),
     columnOne int not null,
@@ -63,6 +67,9 @@
     columnSix timestamp default current_timestamp,
     constraint PK_&lt;tablename&gt;_&lt;columnOne&gt; primary key (columnOne)
   );
+  
+  -- Sequence Alter Ownership
+  alter sequence &lt;tablename&gt;_&lt;tableID&gt;_seq; owned by &lt;tablename&gt;.&lt;tableID&gt;
   </pre>
 
 ### Table Columns
