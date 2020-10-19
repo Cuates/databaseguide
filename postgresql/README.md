@@ -24,6 +24,7 @@
 * [Index Create](#index-create)
 * [Index Show All In Schema](#index-show-all-in-schema)
 * [Indexes Show From A Table](#indexes-show-from-a-table)
+* [Index Drop](#index-drop)
 * [Sequence Grant Privileges](#sequence-grant_privileges)
 * [Access Future Objects In The Database Automatically](#access-future-objects-in-the-database-automatically)
 * [Access Future Objects In The Schema Automatically](#access-future-objects-in-the-schema-automatically)
@@ -91,7 +92,7 @@
   tablename as "Table Name"
   from pg_catalog.pg_tables
   where
-  schemaname in ('public');
+  schemaname in ('&lt;tableschema&gt;');
   </pre>
 
 ### Table Drop
@@ -122,7 +123,7 @@
   </pre>
 
 ### Sequence Drop
-* `drop sequence if exists <table_name>_<tableID>_seq;`
+* `drop sequence if exists <tablename>_<tableID>_seq;`
 
 ### Table Alter Owner
 * `alter table <tablename> owner to <userrolename>;`
@@ -139,14 +140,14 @@
   join pg_catalog.pg_class pgc on pgc.relname = tab.table_name
   join pg_catalog.pg_user pgu on pgu.usesysid = pgc.relowner
   where
-  tab.table_schema in ('public');
+  tab.table_schema in ('&lt;tableschema&gt;');
   </pre>
 
 ### Table Grant Privileges
 * `grant all privileges on all tables in schema <table_schema> to <userrolename>;`
 
 ### Index Create
-* `create index IX_<table_name>_<column_name> on <table_name> ((lower(<column_name>)));`
+* `create index IX_<tablename>_<columnname> on <tablename> (<columnname>);`
 
 ### Index Show All In Schema
 * <pre>
@@ -156,7 +157,7 @@
   pgi.indexdef as "indexdef"
   from pg_indexes pgi
   where
-  pgi.schemaname in ('public')
+  pgi.schemaname in ('&lt;tableschema&gt;')
   order by pgi.tablename, pgi.indexname;
   </pre>
   
@@ -167,17 +168,20 @@
   pgi.indexdef as "indexdef"
   from pg_indexes pgi
   where
-  pgi.tablename in ('&lt;table_name&gt;');
+  pgi.tablename in ('&lt;tablename&gt;');
   </pre>
 
+### Index Drop
+* `drop index if exists IX_<tablename>_<columname> on <tablename>;`
+
 ### Sequence Grant Privileges
-* `grant all privileges on all sequences in schema <table_schema> to <userrolename>;`
+* `grant all privileges on all sequences in schema <tableschema> to <userrolename>;`
 
 ### Access Future Objects In The Database Automatically
 * `alter default privileges grant all on tables to <userrolename>;`
 
 ### Access Future Objects In The Schema Automatically
-* `alter default privileges in schema <table_schema> grant all on tables to <userrolename>;`
+* `alter default privileges in schema <tableschema> grant all on tables to <userrolename>;`
 
 ### Table Columns
 * <pre>
@@ -214,7 +218,7 @@
 * <pre>
   select
   last_value
-  from &lt;table_name&gt;_&lt;tableID&gt;_seq;
+  from &lt;tablename&gt;_&lt;tableID&gt;_seq;
   </pre>
 
 ### Table Select
@@ -277,7 +281,7 @@
   </pre>
   
 ### Function Drop
-* `drop function if exists <function_name>;`
+* `drop function if exists <functionname>;`
 
 ### Procedures
 * **NOTE Stored Procedures are new; Before it was Functions only**
@@ -303,4 +307,4 @@
 * `alter procedure <procedurename> owner to <userrolename>;`
 
 ### Procedure Drop
-* `drop procedure if exists <procedure_name>;`
+* `drop procedure if exists <procedurename>;`
