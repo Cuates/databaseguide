@@ -3,6 +3,7 @@
 
 ## Table of Contents
 * [Version](#version)
+* [User Create](#user-create)
 * [Databases](#databases)
 * [Database Drop](#database-drop)
 * [Database Create](#database-create)
@@ -19,10 +20,28 @@
 * [Table Delete](#table-delete)
 * [Table Truncate](#table-truncate)
 * [Functions](#functions)
+* [Function Drop](#function-drop)
+* [Function Call](#function-call)
 * [Procedures](#procedures)
+* [Procedure Drop](#procedure-drop)
+* [Procedure Call](#procedure-call)
+* [Procedure Status](#procedure-status)
+* [Procedure Creation](#procedure-creation)
 
 ### Version
 * 0.0.1
+
+### User Create
+* `GRANT ALL ON \*.\* TO <user_name>@<ip_address> IDENTIFIED BY '<userpassword>' WITH GRANT OPTION;`
+  * IP_Address means user can login from a specific IP address
+  * "WITH GRANT OPTION" is optional
+* `FLUSH PRIVILEGES;`
+  * The above command is to apply changes
+* `GRANT ALL ON \*.\* TO <user_name>@% IDENTIFIED BY '<userpassword>' WITH GRANT OPTION;`
+  * '%' means user can login from any IP
+  * "WITH GRANT OPTION" is optional
+* FLUSH PRIVILEGES;
+  * The above command is to apply changes
 
 ### Databases
 * `show databases;`
@@ -31,7 +50,7 @@
 * `drop database if exists <databasename>;`
 
 ### Database Create
-* ``create database if not exists `databasename` default character set utf8mb4 collate utf8mb4_unicode_520_ci;``
+* ``create database if not exists `<databasename>` default character set utf8mb4 collate utf8mb4_unicode_520_ci;``
 
 ### Database Connect
 * `use <databasename>;`
@@ -62,8 +81,8 @@
     `columnFive` datetime(6) not null default current_timestamp(),
     `columnSix` datetime(6) default current_timestamp(),
     primary key (`tableID`),
-    unique key `UQ_&lt;tablename&gt;_columnOne` (`columnOne`),
-    index `IX_&lt;tablename&gt;_columnTwo` (`columnTwo`)
+    unique key `UQ_&lt;tablename&gt;_&lt;columnname&gt;` (`&lt;columnname&gt;`),
+    index `IX_&lt;tablename&gt;_&lt;columnname&gt;` (`&lt;columnname&gt;`)
   ) engine=InnoDB default charset=utf8mb4 collate utf8mb4_unicode_520_ci;
   </pre>
 
@@ -131,5 +150,23 @@
 ### Functions
 * `show function status;`
 
+### Function Drop
+* `drop function if exists <functionname>;`
+
+### Function Call
+* `call <functionname> ('<parametervalue>', ...);`
+
 ### Procedures
 * `show procedure status;`
+
+### Procedure Drop
+* `drop procedure if exists <procedurename>;`
+
+### Procedure Call
+* `call <procedurename> ('<parametervalue>', ...);`
+
+### Procedure Status
+* `show procedure status;`
+
+### Procedure Creation
+* `show create procedure <procedurename>;`
