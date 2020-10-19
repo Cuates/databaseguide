@@ -3,6 +3,9 @@
 
 ## Table of Contents
 * [Version](#version)
+* [User Create)(#user-create)
+* [User Orphaned](#user-orphaned)
+* [User Drop](#user-drop)
 * [Databases](#databases)
 * [Database Drop](#database-drop)
 * [Database Create](#database-create)
@@ -12,29 +15,59 @@
 * [Table Drop](#table-drop)
 * [Table Create](#table-create)
 * [Table Columns](#table-columns)
+* [Index Create](#index-create)
+* [Index Drop](#index-drop)
 * [Table Select](#table-select)
 * [Table Insert](#table-insert)
 * [Table Update](#table-update)
 * [Table Delete](#table-delete)
 * [Table Truncate](#table-truncate)
 * [Functions](#functions)
+* [Function Drop](#function-drop)
+* [Function Execute](#function-execute)
 * [Procedures](#procedures)
+* [Procedure Drop](#procedure-drop)
+* [Procedure Execute](#procedure-execute)
 
 ### Version
 * 0.0.1
 
+### User Create
+* `use [<databasename>];`
+* `create login [<loginname>] with password=N'<userpassword>', default_database=[<databasename>], default_language=[us_english], check_expiration=off, check_policy=on;`
+* `create user [<username>] for login <loginname>;`
+* `grant <permissionname> on [<databasename>] to <username>;`
+
+### User Orphaned
+* `alter user <username> with login = <loginname>;`
+
+### User Drop
+* <pre>
+  if exists
+  (
+    select
+    ssp.[name] as [name]
+    from sys.server_principals ssp
+    where
+    ssp.[name] = N'&lt;username&gt;';
+  )
+    begin
+      drop login [&lt;username&gt;];
+    end
+  </pre>
+
 ### Databases
 * <pre>
   select
-  [name] as [Database Name]
-  from sys.databases
+  sd.[name] as [Database Name]
+  from sys.databases sd;
   </pre>
   
 ### Database Drop
 * <pre>
   if db_id (N'&lt;Databasename&gt;') is not null
     begin
-      drop database N'Databasename'
+      drop database N'Databasename';
     end
   </pre>
 
@@ -42,11 +75,11 @@
 * `create database [Databasename];`
   
 ### Database Connect
-* `use [Databasename]`
+* `use [Databasename];`
 
 ### Database Identity Cache
-* `alter database scoped configuration set identity_cache = on`<br />
-  `alter database scoped configuration set identity_cache = off`
+* `alter database scoped configuration set identity_cache = on;`<br />
+  `alter database scoped configuration set identity_cache = off;`
   
 ### Tables
 * <pre>
@@ -57,7 +90,7 @@
   inner join sys.schemas sch on sch.schema_id = tab.schema_id
   where
   tab.[type] in ('U')
-  order by sch.[name] asc, tab.[name] asc
+  order by sch.[name] asc, tab.[name] asc;
   </pre>
 
 ### Table Drop
@@ -72,10 +105,10 @@
     where
     tab.[type] in ('U') and
     tab.[name] = '&lt;Tablename&gt;'
-    order by sch.[name] asc, tab.[name] asc
+    order by sch.[name] asc, tab.[name] asc;
   )
     begin
-      drop table &lt;table_schema&gt;.&lt;Tablename&gt;
+      drop table &lt;table_schema&gt;.&lt;Tablename&gt;;
     end
   </pre>
 
@@ -124,8 +157,19 @@
   where
   tab.[name] in ('&lt;Tablename&gt;') and
   sch.[name] in ('&lt;table_schema&gt;')
-  order by tab.[name] asc, col.column_id asc
+  order by tab.[name] asc, col.column_id asc;
   </pre>
+
+### Index Create
+* <pre>
+  create nonclustered index [IX_&lt;Tablename&gt;_&lt;columnname&gt;] on [&lt;tableschema&gt;].[&lt;Tablename&gt;]
+  (
+    [&lt;columnname&gt;] asc
+  )with (pad_index = off, statistics_norecompute = off, sort_in_tempdb = off, drop_existing = off, online = off, allow_row_locks = on, allow_page_locks = on, optimize_for_sequential_key = off) on [primary]
+  </pre>
+
+### Index Drop
+* `drop index if exists IX_<Tablename>_<columnname> on <tableschema>.<Tablename>;`
 
 ### Table Select
 * <pre>
@@ -137,11 +181,11 @@
   columnFour as [columnFour],
   columnFive as [columnFive],
   columnSix as [columnSix]
-  from &lt;table_schema&gt;.&lt;Tablename&gt;
+  from &lt;table_schema&gt;.&lt;Tablename&gt;;
   </pre>
 
 ### Table Insert
-* `insert into <table_schema>;.<Tablename> (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, getdate(), getdate())`
+* `insert into <table_schema>;.<Tablename> (columnOne, columnTwo, columnThre, columnFour, columnFive, columnSix) values (0, 'columnTwo', 'columnThree', 1, getdate(), getdate());`
 
 ### Table Update
 * <pre>
@@ -150,18 +194,18 @@
   columnFour = 1,
   columnSix = getdate()
   where
-  columnFour = 0
+  columnFour = 0;
   </pre>
 
 ### Table Delete
 * <pre>
   delete from &lt;table_schema&gt;.&lt;Tablename&gt;
   where
-  tableID = 1
+  tableID = 1;
   </pre>
 
 ### Table Truncate
-* `truncate table <table_schema>.<Tablename>`
+* `truncate table <table_schema>.<Tablename>;`
 
 ### Functions
 * <pre>
@@ -188,6 +232,12 @@
   order by schema_name(obj.schema_id) asc, obj.[name] asc;
   </pre>
 
+### Function Drop
+* `drop procedure if exists <tableschema>.<functionname>;`
+
+### Function Execute
+* `exec <tableschema>.<functionname> (parameterone, ...);`
+
 ### Procedures
 * <pre>
   select
@@ -212,3 +262,9 @@
   obj.type in ('P', 'X')
   order by schema_name(obj.schema_id) asc, obj.[name] asc;
   </pre>
+
+### Procedure Drop
+* `drop procedure if exists <tableschema>.<procedurename>;`
+
+### Procedure Execute
+* `exec <tableschema>.<procedurename> @parameterone = '', ...;`
