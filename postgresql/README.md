@@ -70,6 +70,9 @@
   
   -- Sequence Alter Ownership
   alter sequence &lt;tablename&gt;_&lt;tableID&gt;_seq; owned by &lt;tablename&gt;.&lt;tableID&gt;
+  
+  -- Sequence Grant Permission
+  grant usage, select on sequence &lt;tablename&gt;_&lt;tableID&gt;_seq to &lt;userrolename&gt;;
   </pre>
 
 ### Table Columns
