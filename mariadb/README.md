@@ -14,6 +14,8 @@
 * [Table Creation](#table-creation)
 * [Table Columns](#table-columns)
 * [Table Indexes](#table-indexes)
+* [Index Create](#index-create)
+* [Index Drop](#index-drop)
 * [Table Select](#table-select)
 * [Table Insert](#table-insert)
 * [Table Update](#table-update)
@@ -104,12 +106,18 @@
   from information_schema.columns col
   where
   col.table_name in ('&lt;tablename&gt;') and
-  col.table_schema in ('&lt;table_schema&gt;')
+  col.table_schema in ('&lt;tableschema&gt;')
   order by col.table_name asc, col.ordinal_position asc;
   </pre>
 
 ### Table Indexes
 * `show index from <tablename>;`
+
+### Index Create
+* `create index `IX_<tablename>_<columnname>` on <tablename> (`<columnname>`);`
+
+### Index Drop
+* `drop index if exists `IX_<tablename>_<columnname>` on <tablename>;`
 
 ### Table Select
 * <pre>
