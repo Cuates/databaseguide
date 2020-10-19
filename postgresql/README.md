@@ -17,7 +17,8 @@
 * [Table Delete](#table-delete)
 * [Table Truncate](#table-truncate)
 * [Table Truncate And Reseed Identity](#table-truncate-and-reseed-identity)
-* [Functions And Procedures](#functions-and-procedures)
+* [Functions](#functions)
+* [Procedures](#procedures)
 
 ### Version
 * 0.0.1
@@ -128,65 +129,41 @@
 * **NOTE Need to be owner user of the table**
 * `truncate table <tablename> restart identity;`
 
-### Functions and Procedures
+### Functions
+* <pre>
+  select
+  rou.specific_schema as "procedure_schema",
+  rou.routine_name as "procedure_name",
+  rou.routine_type as "kind",
+  rou.external_language as "external_language",
+  par.ordinal_position as "position",
+  par.parameter_name as "paramter_name",
+  par.parameter_mode as "parameter_mode",
+  par.data_type as "data_type"
+  from information_schema.routines rou
+  left join information_schema.parameters par on par.specific_schema = rou.specific_schema and par.specific_name = rou.specific_name
+  where
+  rou.routine_schema not in ('pg_catalog', 'information_schema') and
+  rou.routine_type in ('FUNCTION')
+  order by rou.specific_schema asc, rou.routine_name asc, par.ordinal_position asc;
+  </pre>
+
+### Procedures
 * **NOTE Stored Procedures are new; Before it was Functions only**
-* User Defined Functions Universal
-  * <pre>
-    select
-    n.nspname as "function_schema",
-    p.proname as "function_name",
-    l.lanname as "function_language",
-    case
-      when l.lanname = 'internal'
-        then
-          p.prosrc
-      else
-        pg_get_functiondef(p.oid)
-    end as "definition",
-    pg_get_function_arguments(p.oid) as "function_arguments",
-    t.typname as "return_type"
-    from pg_proc p
-    left join pg_namespace n on p.pronamespace = n.oid
-    left join pg_language l on p.prolang = l.oid
-    left join pg_type t on t.oid = p.prorettype
-    where
-    n.nspname not in ('pg_catalog', 'information_schema')
-    order by function_schema, function_name;
-    </pre>
-* User Defined Functions 11+
-  * <pre>
-    select
-    n.nspname as "schema_name",
-    p.proname as "specific_name",
-    case p.prokind
-      when 'f'
-        then
-          'FUNCTION'
-      when 'p'
-        then
-          'PROCEDURE'
-      when 'a'
-        then
-          'AGGREGATE'
-      when 'w'
-        then
-          'WINDOW'
-    end as "kind",
-    l.lanname as "language",
-    case
-      when l.lanname = 'internal'
-        then
-          p.prosrc
-      else
-        pg_get_functiondef(p.oid)
-    end as "definition",
-    pg_get_function_arguments(p.oid) as "arguments",
-    t.typname as "return_type"
-    from pg_proc p
-    left join pg_namespace n on p.pronamespace = n.oid
-    left join pg_language l on p.prolang = l.oid
-    left join pg_type t on t.oid = p.prorettype
-    where
-    n.nspname not in ('pg_catalog', 'information_schema')
-    order by schema_name, specific_name;
-    </pre>
+* <pre>
+  select
+  rou.specific_schema as "procedure_schema",
+  rou.routine_name as "procedure_name",
+  rou.routine_type as "kind",
+  rou.external_language as "external_language",
+  par.ordinal_position as "position",
+  par.parameter_name as "paramter_name",
+  par.parameter_mode as "parameter_mode",
+  par.data_type as "data_type"
+  from information_schema.routines rou
+  left join information_schema.parameters par on par.specific_schema = rou.specific_schema and par.specific_name = rou.specific_name
+  where
+  rou.routine_schema not in ('pg_catalog', 'information_schema') and
+  rou.routine_type in ('PROCEDURE')
+  order by rou.specific_schema asc, rou.routine_name asc, par.ordinal_position asc;
+  </pre>
