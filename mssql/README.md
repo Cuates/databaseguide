@@ -3,7 +3,7 @@
 
 ## Table of Contents
 * [Version](#version)
-* [User Create)(#user-create)
+* [User Create](#user-create)
 * [User Orphaned](#user-orphaned)
 * [User Drop](#user-drop)
 * [Databases](#databases)
