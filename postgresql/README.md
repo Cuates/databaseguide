@@ -38,9 +38,11 @@
 * [Table Truncate And Reseed Identity](#table-truncate-and-reseed-identity)
 * [Functions](#functions)
 * [Function Drop](#function-drop)
+* [Function Call](#function-call)
 * [Procedures](#procedures)
 * [Procedure Alter Owner To Role](#procedure-alter-owner-to-role)
-* [Function Drop](#procedure-drop)
+* [Procedure Drop](#procedure-drop)
+* [Procedure Call](#procedure-call)
 
 ### Version
 * 0.0.1
@@ -283,6 +285,9 @@
 ### Function Drop
 * `drop function if exists <functionname>;`
 
+### Function Call
+* `call <functionname> ('<parametervalue>', ...);`
+
 ### Procedures
 * **NOTE Stored Procedures are new; Before it was Functions only**
 * <pre>
@@ -308,3 +313,6 @@
 
 ### Procedure Drop
 * `drop procedure if exists <procedurename>;`
+
+### Procedure Call
+* `call <procedurename> ('<parametervalue>', ...);`
