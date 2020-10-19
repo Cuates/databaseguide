@@ -37,6 +37,14 @@
 * `create login [<loginname>] with password=N'<userpassword>', default_database=[<databasename>], default_language=[us_english], check_expiration=off, check_policy=on;`
 * `create user [<username>] for login <loginname>;`
 * `grant <permissionname> on [<databasename>] to <username>;`
+  * <pre>
+    select
+    entity_name,
+    subentity_name,
+    permission_name
+    from fn_my_permissions('&lt;Databasename&gt;', 'Database')
+    order by subentity_name asc, permission_name asc;
+    </pre>
 
 ### User Orphaned
 * `alter user <username> with login = <loginname>;`
