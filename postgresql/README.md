@@ -3,14 +3,32 @@
 
 ## Table of Contents
 * [Version](#version)
+* [Extension](#extension)
+* [User Create](#user-create)
+* [Owner Reassign](#owner-reassign)
+* [Owner Drop](#owner-drop)
+* [User Drop](#user-drop)
 * [Databases](#databases)
 * [Database Drop](#database-drop)
 * [Database Create](#database-create)
+* [Database Grant Privileges](#database-grant-privileges)
+* [Database Alter Owner To Role](#database-alter-owner-to-role)
 * [Database Connect](#database-connect)
 * [Tables](#tables)
 * [Table Drop](#table-drop)
 * [Table Create](#table-create)
+* [Sequence Drop](#sequence-drop)
+* [Table Alter Owner](#table-alter-owner)
+* [Table Owner](#table-owner)
+* [Table Grant Privileges](#table-grant-privileges)
+* [Index Create](#index-create)
+* [Index Show All In Schema](#index-show-all-in-schema)
+* [Indexes Show From A Table](#indexes-show-from-a-table)
+* [Sequence Grant Privileges](#sequence-grant_privileges)
+* [Access Future Objects In The Database Automatically](#access-future-objects-in-the-database-automatically)
+* [Access Future Objects In The Schema Automatically](#access-future-objects-in-the-schema-automatically)
 * [Table Columns](#table-columns)
+* [Sequnce Show Last Value](#sequnce-show-last-value)
 * [Table Select](#table-select)
 * [Table Insert](#table-insert)
 * [Table Update](#table-update)
@@ -18,10 +36,32 @@
 * [Table Truncate](#table-truncate)
 * [Table Truncate And Reseed Identity](#table-truncate-and-reseed-identity)
 * [Functions](#functions)
+* [Function Drop](#function-drop)
 * [Procedures](#procedures)
+* [Procedure Alter Owner To Role](#procedure-alter-owner-to-role)
+* [Function Drop](#procedure-drop)
 
 ### Version
 * 0.0.1
+
+### Extension
+* <pre>
+  select
+  pge.extname as "extname"
+  from pg_extension pge;
+  </pre>
+
+### User Create
+* `create user <userrolename> with password '<userrolepassword>';`
+
+### Owner Reassign
+* `reassign owned by <userrolename> to postgres;`
+
+### Owner Drop
+* `drop owned by <userrolename>;`
+
+### User Drop
+* `drop user <userrolename>;`
 
 ### Databases
 * <pre>
@@ -35,7 +75,13 @@
 
 ### Database Create
 * `create database <databasename>;` **NOTE Does not have 'if exists' when creating databases**
-  
+
+### Database Grant Privileges
+* `grant all privileges on database media to mediasql;`
+
+### Database Alter Owner To Role
+* `alter database <databasename> owner to <userrolename>;`
+
 ### Database Connect
 * `\c <databasename>;`
 
@@ -45,7 +91,7 @@
   tablename as "Table Name"
   from pg_catalog.pg_tables
   where
-  schemaname = 'public';
+  schemaname in ('public');
   </pre>
 
 ### Table Drop
@@ -69,11 +115,69 @@
   );
   
   -- Sequence Alter Ownership
-  alter sequence &lt;tablename&gt;_&lt;tableID&gt;_seq; owned by &lt;tablename&gt;.&lt;tableID&gt;
+  alter sequence &lt;tablename&gt;_&lt;tableID&gt;_seq; owned by &lt;tablename&gt;.&lt;tableID&gt;;
   
   -- Sequence Grant Permission
   grant usage, select on sequence &lt;tablename&gt;_&lt;tableID&gt;_seq to &lt;userrolename&gt;;
   </pre>
+
+### Sequence Drop
+* `drop sequence if exists <table_name>_<tableID>_seq;`
+
+### Table Alter Owner
+* `alter table <tablename> owner to <userrolename>;`
+
+### Table Owner
+* <pre>
+  select
+  tab.table_name as "table_name",
+  tab.table_type as "table_type",
+  pgc.relname as "relname",
+  pgc.relowner as "relowner",
+  pgu.usename as "usename"
+  from information_schema.tables tab
+  join pg_catalog.pg_class pgc on pgc.relname = tab.table_name
+  join pg_catalog.pg_user pgu on pgu.usesysid = pgc.relowner
+  where
+  tab.table_schema in ('public');
+  </pre>
+
+### Table Grant Privileges
+* `grant all privileges on all tables in schema <table_schema> to <userrolename>;`
+
+### Index Create
+* `create index IX_<table_name>_<column_name> on <table_name> ((lower(<column_name>)));`
+
+### Index Show All In Schema
+* <pre>
+  select
+  pgi.tablename as "tablename",
+  pgi.indexname as "indexname",
+  pgi.indexdef as "indexdef"
+  from pg_indexes pgi
+  where
+  pgi.schemaname in ('public')
+  order by pgi.tablename, pgi.indexname;
+  </pre>
+  
+### Indexes Show From A Table
+* <pre>
+  select
+  pgi.indexname as "indexname",
+  pgi.indexdef as "indexdef"
+  from pg_indexes pgi
+  where
+  pgi.tablename in ('&lt;table_name&gt;');
+  </pre>
+
+### Sequence Grant Privileges
+* `grant all privileges on all sequences in schema <table_schema> to <userrolename>;`
+
+### Access Future Objects In The Database Automatically
+* `alter default privileges grant all on tables to <userrolename>;`
+
+### Access Future Objects In The Schema Automatically
+* `alter default privileges in schema <table_schema> grant all on tables to <userrolename>;`
 
 ### Table Columns
 * <pre>
@@ -97,6 +201,20 @@
   col.table_name in ('&lt;tablename&gt;') and
   col.table_schema in ('&lt;table_schema&gt;')
   order by col.table_name asc, col.ordinal_position asc;
+  </pre>
+
+### Sequnce Show Last Value
+* <pre>
+  select
+  pgc.relname as "relname"
+  from pg_class pgc
+  where
+  pgc.relkind = 'S';
+  </pre>
+* <pre>
+  select
+  last_value
+  from &lt;table_name&gt;_&lt;tableID&gt;_seq;
   </pre>
 
 ### Table Select
@@ -157,6 +275,9 @@
   rou.routine_type in ('FUNCTION')
   order by rou.specific_schema asc, rou.routine_name asc, par.ordinal_position asc;
   </pre>
+  
+### Function Drop
+* `drop function if exists <function_name>;`
 
 ### Procedures
 * **NOTE Stored Procedures are new; Before it was Functions only**
@@ -177,3 +298,9 @@
   rou.routine_type in ('PROCEDURE')
   order by rou.specific_schema asc, rou.routine_name asc, par.ordinal_position asc;
   </pre>
+
+### Procedure Alter Owner To Role
+* `alter procedure <procedurename> owner to <userrolename>;`
+
+### Procedure Drop
+* `drop procedure if exists <procedure_name>;`
