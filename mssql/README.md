@@ -1,7 +1,7 @@
 # MSSQL Database Guide
 > MSSQL Database Guide
 
-[SQL Server Identity Jumping 1000 Identity Cache](https://blog.sqlauthority.com/2018/01/24/sql-server-identity-jumping-1000-identity_cache/)<br />>
+[SQL Server Identity Jumping 1000 Identity Cache](https://blog.sqlauthority.com/2018/01/24/sql-server-identity-jumping-1000-identity_cache/)<br />
 [SQL Server List Tables How To Show All Tables](https://chartio.com/resources/tutorials/sql-server-list-tables-how-to-show-all-tables/)<br />
 [List All Indexes In The Database](https://dataedo.com/kb/query/sql-server/list-all-indexes-in-the-database)<br />
 [List Columns Names In Specific Table](https://dataedo.com/kb/query/sql-server/list-columns-names-in-specific-table)<br />
