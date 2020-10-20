@@ -1,6 +1,37 @@
 # MSSQL Database Guide
 > MSSQL Database Guide
 
+[SQL Server Identity Jumping 1000 Identity Cache](https://blog.sqlauthority.com/2018/01/24/sql-server-identity-jumping-1000-identity_cache/)<br />>
+[SQL Server List Tables How To Show All Tables](https://chartio.com/resources/tutorials/sql-server-list-tables-how-to-show-all-tables/)<br />
+[List All Indexes In The Database](https://dataedo.com/kb/query/sql-server/list-all-indexes-in-the-database)<br />
+[List Columns Names In Specific Table](https://dataedo.com/kb/query/sql-server/list-columns-names-in-specific-table)<br />
+[List Of Tables By The Number Of Rows](https://dataedo.com/kb/query/sql-server/list-of-tables-by-the-number-of-rows)<br />
+[List Of Tables By Their Size](https://dataedo.com/kb/query/sql-server/list-of-tables-by-their-size)<br />
+[List Stored Procedures](https://dataedo.com/kb/query/sql-server/list-stored-procedures)<br />
+[Tip SP Validatelogins And SP Change Users Login](https://dbtut.com/index.php/2018/12/26/tip-sp_validatelogins-and-sp_change_users_login/)<br />
+[How To Create A Linked Server To Connect To PostgreSQL From SQL Server](https://dbtut.com/index.php/2019/10/22/how-to-create-a-linked-server-to-connect-to-postgresql-from-sql-server/)<br />
+[View A List Of Databases On An Instance Of SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/databases/view-a-list-of-databases-on-an-instance-of-sql-server?view=sql-server-ver15)<br />
+[Create Linked Servers SQL Server Database Engine](https://docs.microsoft.com/en-us/sql/relational-databases/linked-servers/create-linked-servers-sql-server-database-engine?view=sql-server-ver15)<br />
+[Create Database Transact SQL](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-database-transact-sql?view=sql-server-ver15&tabs=sqlpool)<br />
+[Create Table Transact SQL](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql?view=sql-server-ver15)<br />
+[Drop Index Transact SQL](https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-index-transact-sql?view=sql-server-ver15)<br />
+[Drop Procedure Transact SQL](https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-procedure-transact-sql?view=sql-server-ver15)<br />
+[Drop Table Transact SQL](https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-table-transact-sql?view=sql-server-ver15)<br />
+[MSSQL MySQL Linked Server](https://gunnarpeipman.com/mssql-mysql-linked-server/)<br />
+[Creating A Linked Server With A Postgres Database](https://peter-whyte.com/creating-a-linked-server-with-a-postgres-database/)<br />
+[TSQL Remove User From All Databases](https://sqlsolace.blogspot.com/2009/07/tsql-remove-user-from-all-databases.html)<br />
+[TSQL Script Current User Database Permissions](https://stackoverflow.com/questions/15386692/t-sql-script-current-user-database-permissions)<br />
+[Does A Drop Table Also Drop The Constraints](https://stackoverflow.com/questions/43488105/does-a-drop-table-also-drop-the-constraints)<br />
+[How To Drop A Table If It Exists](https://stackoverflow.com/questions/7887011/how-to-drop-a-table-if-it-exists)<br />
+[SQL Server Create User](https://www.guru99.com/sql-server-create-user.html)<br />
+[SQL Server And PostgreSQL Linked Server Configuration Part 2](https://www.mssqltips.com/sqlservertip/3662/sql-server-and-postgresql-linked-server-configuration--part-2/)<br />
+[Create A Linked Server To MySQL From SQL Server](https://www.mssqltips.com/sqlservertip/4577/create-a-linked-server-to-mysql-from-sql-server/)<br />
+[Examples Using The Sys Schema In SQL Server](https://www.roundthecode.com/sql-server/examples-using-the-sys-schema-in-sql-server)<br />
+[The Identity Cache Option In SQL Server](https://www.sqlnethub.com/blog/the-identity-cache-option-in-sql-server/)<br />
+[SQL Server Create Database](https://www.sqlservertutorial.net/sql-server-basics/sql-server-create-database/)<br />
+[Configure ODBC Drivers For MySQL](https://www.sqlshack.com/configure-odbc-drivers-for-mysql/)<br />
+[Enable Disable Identity Cache SQL Server 2017](https://www.sqlshack.com/enable-disable-identity-cache-sql-server-2017/)
+
 ## Table of Contents
 * [Version](#version)
 * [User Create](#user-create)
@@ -57,11 +88,11 @@
     ssp.[name] as [name]
     from sys.server_principals ssp
     where
-    ssp.[name] = N'&lt;username&gt;';
+    ssp.[name] = N'&lt;username&gt;'
   )
     begin
-      drop login [&lt;username&gt;];
-    end
+      drop login [&lt;username&gt;]
+    end;
   </pre>
 
 ### Databases
@@ -75,8 +106,8 @@
 * <pre>
   if db_id (N'&lt;Databasename&gt;') is not null
     begin
-      drop database N'Databasename';
-    end
+      drop database N'Databasename'
+    end;
   </pre>
 
 ### Database Create
@@ -113,11 +144,11 @@
     where
     tab.[type] in ('U') and
     tab.[name] = '&lt;Tablename&gt;'
-    order by sch.[name] asc, tab.[name] asc;
+    order by sch.[name] asc, tab.[name] asc
   )
     begin
-      drop table &lt;table_schema&gt;.&lt;Tablename&gt;;
-    end
+      drop table &lt;table_schema&gt;.&lt;Tablename&gt;
+    end;
   </pre>
 
 ### Table Create
@@ -173,7 +204,7 @@
   create nonclustered index [IX_&lt;Tablename&gt;_&lt;columnname&gt;] on [&lt;tableschema&gt;].[&lt;Tablename&gt;]
   (
     [&lt;columnname&gt;] asc
-  )with (pad_index = off, statistics_norecompute = off, sort_in_tempdb = off, drop_existing = off, online = off, allow_row_locks = on, allow_page_locks = on, optimize_for_sequential_key = off) on [primary]
+  )with (pad_index = off, statistics_norecompute = off, sort_in_tempdb = off, drop_existing = off, online = off, allow_row_locks = on, allow_page_locks = on, optimize_for_sequential_key = off) on [primary];
   </pre>
 
 ### Index Drop
