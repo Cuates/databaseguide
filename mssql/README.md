@@ -106,7 +106,7 @@
 * <pre>
   if db_id (N'&lt;Databasename&gt;') is not null
     begin
-      drop database N'Databasename'
+      drop database [&lt;Databasename&gt;];
     end;
   </pre>
 
