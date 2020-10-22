@@ -54,6 +54,12 @@
   from pg_extension pge;
   </pre>
 
+### Extension Drop
+* `drop extension if exists <extensionname>;`
+
+### Extension Create
+* `create extension if not exists <extensionname> with schema <tableschema>;`
+
 ### User Create
 * `create user <userrolename> with password '<userrolepassword>';`
 
