@@ -4,6 +4,8 @@
 ## Table of Contents
 * [Version](#version)
 * [Extension](#extension)
+* [Extension Drop](#extension-drop)
+* [Extension Create](#extension-create)
 * [User Create](#user-create)
 * [Owner Reassign](#owner-reassign)
 * [Owner Drop](#owner-drop)
