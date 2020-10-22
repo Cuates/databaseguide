@@ -34,12 +34,12 @@
 * 0.0.1
 
 ### User Create
-* `GRANT ALL ON \*.\* TO <user_name>@<ip_address> IDENTIFIED BY '<userpassword>' WITH GRANT OPTION;`
+* `GRANT ALL ON *.* TO <user_name>@<ip_address> IDENTIFIED BY '<userpassword>' WITH GRANT OPTION;`
   * IP_Address means user can login from a specific IP address
   * "WITH GRANT OPTION" is optional
 * `FLUSH PRIVILEGES;`
   * The above command is to apply changes
-* `GRANT ALL ON \*.\* TO <user_name>@% IDENTIFIED BY '<userpassword>' WITH GRANT OPTION;`
+* `GRANT ALL ON *.* TO <user_name>@'%' IDENTIFIED BY '<userpassword>' WITH GRANT OPTION;`
   * '%' means user can login from any IP
   * "WITH GRANT OPTION" is optional
 * FLUSH PRIVILEGES;
