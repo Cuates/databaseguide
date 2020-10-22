@@ -58,7 +58,7 @@
 * `drop extension if exists <extensionname>;`
 
 ### Extension Create
-* `create extension if not exists <extensionname> with schema <tableschema>;`
+* `create extension if not exists <extensionname> with schema <databaseschema>;`
 
 ### User Create
 * `create user <userrolename> with password '<userrolepassword>';`
