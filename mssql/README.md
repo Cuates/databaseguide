@@ -91,7 +91,7 @@
     ssp.[name] = N'&lt;username&gt;'
   )
     begin
-      drop login [&lt;username&gt;]
+      drop login [&lt;username&gt;];
     end;
   </pre>
 
