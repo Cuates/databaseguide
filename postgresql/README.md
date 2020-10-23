@@ -55,12 +55,15 @@
   pge.extname as "extname"
   from pg_extension pge;
   </pre>
+  * NOTE: Must be selected on each database
 
 ### Extension Drop
 * `drop extension if exists <extensionname>;`
+  * NOTE: Must be dropped on each database not needing the extension
 
 ### Extension Create
 * `create extension if not exists <extensionname> with schema <databaseschema>;`
+  * NOTE: Must be created on each database needing the extension
 
 ### User Create
 * `create user <userrolename> with password '<userrolepassword>';`
