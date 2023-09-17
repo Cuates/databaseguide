@@ -45,6 +45,7 @@
 * [Procedure Alter Owner To Role](#procedure-alter-owner-to-role)
 * [Procedure Drop](#procedure-drop)
 * [Procedure Call](#procedure-call)
+* [Collation Version Mismatch](#collation-version-mismatch)
 
 ### Version
 * 0.0.1
@@ -327,3 +328,8 @@
 
 ### Procedure Call
 * `call <procedurename> ('<parametervalue>', ...);`
+
+### Collation Version Mismatch
+* `reindex database <databasename>;`
+* `alter database <databasename> refresh collation version;`
+* NOTE: Restart the database after the above commands were executed
