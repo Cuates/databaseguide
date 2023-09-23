@@ -374,7 +374,7 @@
        * WAIT FOR THE PROCESS TO FINISH
   * Your new postgresql database now has the old database backup imported
 * Docker Container
-  * Open the Docker container terminal of your choice
+  * Open the Docker container terminal
   * Copy over the backup of your old database into the postgresql location
   * `cp filename.gz /var/lib/postgresql/`
   * Set the permissions to postgres user for the file just copied
