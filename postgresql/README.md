@@ -350,26 +350,53 @@
     * The compressed file is saved where the command prompt path is at
 
 ### Importing from a backup gz file
-* Open a terminal of your choice
-* Copy over the backup of your old database into the postgresql location
- * `cp filename.gz /var/lib/pgsql/` LINUX
- * `cp filename.gz /var/lib/postgresql/` DOCKER CONTAINER
-* Set the permissions to postgres user for the file just copied
- * `chown postgres:postgres filename.gz`
-* Login as the postgresql user
- * `sudo -i -u postgres`
- * User Create
-   * `create user <username> with password '<password>';`
- * Database Create
-   * `create database <databasename>;` **NOTE Does not have 'if exists' when creating databases**
- * Database Grant Privileges
-   * `grant all privileges on database <databasename> to <username>;`
-* Table Alter Owner To Role
- * Database Alter Owner To Role
-   * `alter database <databasename> owner to <username>;`
-* Use compressed dumps of choice to import everything from your old database to your new database
- * The following command will be for gz file; yours will vary depending on what compression you chose
-   * `gunzip -c filename.gz | psql <database_name>`
-     * "-c" is to drop the database objects before recreating them
-     * WAIT FOR THE PROCESS TO FINISH
-* Your new postgresql database now has the old database backup imported
+* Linux
+  * Open a terminal of your choice
+  * Copy over the backup of your old database into the postgresql location
+   * `cp filename.gz /var/lib/pgsql/`
+  * Set the permissions to postgres user for the file just copied
+   * `chown postgres:postgres filename.gz`
+  * Login as the postgresql user
+   * `sudo -i -u postgres`
+   * User Create
+     * `create user <username> with password '<password>';`
+   * Database Create
+     * `create database <databasename>;` **NOTE Does not have 'if exists' when creating databases**
+   * Database Grant Privileges
+     * `grant all privileges on database <databasename> to <username>;`
+  * Table Alter Owner To Role
+   * Database Alter Owner To Role
+     * `alter database <databasename> owner to <username>;`
+  * Use compressed dumps of choice to import everything from your old database to your new database
+   * The following command will be for gz file; yours will vary depending on what compression you chose
+     * `gunzip -c filename.gz | psql <database_name>`
+       * "-c" is to drop the database objects before recreating them
+       * WAIT FOR THE PROCESS TO FINISH
+  * Your new postgresql database now has the old database backup imported
+* Docker Container
+  * Open the Docker container terminal of your choice
+  * Copy over the backup of your old database into the postgresql location
+  * `cp filename.gz /var/lib/postgresql/`
+  * Set the permissions to postgres user for the file just copied
+   * `chown postgres:postgres filename.gz`
+  * Login as the postgresql user
+   * `su postgres`
+   * Access Postgres SQL database
+     * `psql`
+   * User Create
+     * `create user <username> with password '<password>';`
+   * Database Create
+     * `create database <databasename>;` **NOTE Does not have 'if exists' when creating databases**
+   * Database Grant Privileges
+     * `grant all privileges on database <databasename> to <username>;`
+  * Table Alter Owner To Role
+   * Database Alter Owner To Role
+     * `alter database <databasename> owner to <username>;`
+ * Exit from Postgres SQL database
+   * `exit`
+  * Use compressed dumps of choice to import everything from your old database to your new database
+   * The following command will be for gz file; yours will vary depending on what compression you chose
+     * `gunzip -c filename.gz | psql <database_name>`
+       * "-c" is to drop the database objects before recreating them
+       * WAIT FOR THE PROCESS TO FINISH
+  * Your new postgresql database now has the old database backup imported 
