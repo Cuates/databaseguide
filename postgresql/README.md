@@ -337,12 +337,17 @@
 * NOTE: Restart the database after the above commands were executed
 
 ### Backup Database
-* Login as postgres user
-  * `sudo -i -u postgres`
+* Linux
+  * Login as postgres user
+    * `sudo -i -u postgres`
+    * Create a dump of the database as a compressed file
+      * `pg_dump <database_instance> | gzip > database_instance_pg_dump_2023-09-23.gz`
+    * The compressed file is saved in the current path
+      * `/var/lib/pgsql`
+* Docker Container
   * Create a dump of the database as a compressed file
-    * `pg_dump <database_instance> | gzip > database_instance_pg_dump_2021-04-21.gz`
-  * The compressed file is saved in the current path
-    * `/var/lib/pgsql`
+      * `pg_dump <database_instance> -U <postgres> | gzip > database_instance_pg_dump_2023-09-23.gz`
+    * The compressed file is saved where the command prompt path is at
 
 ### Importing from a backup gz file
 * Open a terminal of your choice
