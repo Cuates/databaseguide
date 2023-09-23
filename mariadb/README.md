@@ -230,7 +230,7 @@
     * newdatabase is the name of the freshly created database
     * data-dump.sql is the data dump file to be imported, located in the current directory
     * NOTE: make sure to look at your user table as this may have updated with the contents of the dump
-* Third open the dump in a mariadb client (GUI version using dump file)
+* Third (alternative) open the dump in a mariadb client (GUI version using dump file)
   * The dump will consist of various select, insert, delete, and so on statements
   * Make sure to include the following command at the top of the dump; this will make sure you are using the correct database
   * NOTE: If the create database is inserted at the top of the dump file then this will go below the create database command
