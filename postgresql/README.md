@@ -46,6 +46,8 @@
 * [Procedure Drop](#procedure-drop)
 * [Procedure Call](#procedure-call)
 * [Collation Version Mismatch](#collation-version-mismatch)
+* [Backup Database](#backup-database)
+* [Importing from a backup gz file](#importing-from-a-backup-gz-file)
 
 ### Version
 * 0.0.1
@@ -333,3 +335,35 @@
 * `reindex database <databasename>;`
 * `alter database <databasename> refresh collation version;`
 * NOTE: Restart the database after the above commands were executed
+
+### Backup Database
+* Login as postgres user
+  * `sudo -i -u postgres`
+  * Create a dump of the database as a compressed file
+    * `pg_dump <database_instance> | gzip > database_instance_pg_dump_2021-04-21.gz`
+  * The compressed file is saved in the current path
+    * `/var/lib/pgsql`
+
+### Importing from a backup gz file
+* Open a terminal of your choice
+* Copy over the backup of your old database into the postgresql location
+ * `cp filename.gz /var/lib/pgsql/`
+* Set the permissions to postgres user for the file just copied
+ * `chown postgres:postgres filename.gz`
+* Login as the postgresql user
+ * `sudo -i -u postgres`
+ * User Create
+   * `create user <username> with password '<password>';`
+ * Database Create
+   * `create database <databasename>;` **NOTE Does not have 'if exists' when creating databases**
+ * Database Grant Privileges
+   * `grant all privileges on database <databasename> to <username>;`
+* Table Alter Owner To Role
+ * Database Alter Owner To Role
+   * `alter database <databasename> owner to <username>;`
+* Use compressed dumps of choice to import everything from your old database to your new database
+ * The following command will be for gz file; yours will vary depending on what compression you chose
+   * `gunzip -c filename.gz | psql <database_name>`
+     * "-c" is to drop the database objects before recreating them
+     * WAIT FOR THE PROCESS TO FINISH
+* Your new postgresql database now has the old database backup imported
