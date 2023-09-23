@@ -380,7 +380,7 @@
   * Set the permissions to postgres user for the file just copied
    * `chown postgres:postgres filename.gz`
   * Login as the postgresql user
-   * `su postgres`
+     * `su postgres`
    * Access Postgres SQL database
      * `psql`
    * User Create
