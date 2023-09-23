@@ -29,6 +29,9 @@
 * [Procedure Call](#procedure-call)
 * [Procedure Status](#procedure-status)
 * [Procedure Creation](#procedure-creation)
+* [Export](#export)
+* [Check Export If It's A Legitimate SQL Dump File](#check-export-if-it's-a-legitimate-sql-dump-file)
+* [Import](#import)
 
 ### Version
 * 0.0.1
@@ -178,3 +181,43 @@
 
 ### Procedure Creation
 * `show create procedure <procedurename>;`
+
+### Export
+* Open a terminal of choice to execute the following dump command
+* The following command will dump the content of the database to a file named with current date-time stamp
+* NOTE: You will want to take a backup of the database with the mariadb 'root' user name, so you will need the root mariadb password to continue the SQL dump command
+* You will be prompted to input the mariadb user name's password you entered into the dump command
+  * Dump for a certain database;
+    * NOTE: You will have to create your Database to import the dump back into the database as the command dumps everything inside the database to a file
+      * ````mysqldump -u <mariadb_user_name> -p <database_instance> -R -E --triggers --single-transaction > database_instance_`date +%d_%b_%Y_%H_%M_%S`.sql````
+  * Dump all databases
+    * ````mysqldump -u <mariadb_user_name> -p -A -R -E --triggers --single-transaction > database_instance_`date +%d_%b_%Y_%H_%M_%S`.sql````
+  * Flag meaning
+    * -A For all databases &#40;you can also use --all-databases&#41;
+    * -R For all routines &#40;stored procedures & triggers&#41;
+    * -E For all events
+    * --single-transaction Without locking the tables i.e., without interrupting any connection &#40;R/W&#41;
+
+### Check Export If It's A Legitimate SQL Dump File
+* `head -n 5 database_instance_dump.sql`
+
+### Import
+* Make sure your database is all setup and ready for database and table creation
+* Make sure you have the dump from your old database system
+* First create the database
+  * NOTE: The following command can be inserted at the top of the dump file, you will be able to execute everything at once instead of multiple executions
+    * ````create database if not exists `<database_instance>` default character set utf8mb4 collate utf8mb4_unicode_520_ci;````
+* Second create users that will access the database
+* Third open terminal
+  * `mysql -u username -p new_database < data-dump.sql`
+    * username is the username you can log in to the database with
+    * newdatabase is the name of the freshly created database
+    * data-dump.sql is the data dump file to be imported, located in the current directory
+    * NOTE: make sure to look at your user table as this may have updated with the contents of the dump
+* Third open the dump in a mariadb client (GUI version using dump file)
+  * The dump will consist of various select, insert, delete, and so on statements
+  * Make sure to include the following command at the top of the dump; this will make sure you are using the correct database
+  * NOTE: If the create database is inserted at the top of the dump file then this will go below the create database command
+    * `use <database_instance>;`
+    * Execute the entire dump and wait for the commands to finish
+* You should now be back up and running with your old database system on your new system
