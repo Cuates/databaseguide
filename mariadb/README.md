@@ -183,20 +183,36 @@
 * `show create procedure <procedurename>;`
 
 ### Export
-* Open a terminal of choice to execute the following dump command
-* The following command will dump the content of the database to a file named with current date-time stamp
-* NOTE: You will want to take a backup of the database with the mariadb 'root' user name, so you will need the root mariadb password to continue the SQL dump command
-* You will be prompted to input the mariadb user name's password you entered into the dump command
-  * Dump for a certain database;
-    * NOTE: You will have to create your Database to import the dump back into the database as the command dumps everything inside the database to a file
-      * ````mysqldump -u <mariadb_user_name> -p <database_instance> -R -E --triggers --single-transaction > database_instance_`date +%d_%b_%Y_%H_%M_%S`.sql````
-  * Dump all databases
-    * ````mysqldump -u <mariadb_user_name> -p -A -R -E --triggers --single-transaction > database_instance_`date +%d_%b_%Y_%H_%M_%S`.sql````
-  * Flag meaning
-    * -A For all databases &#40;you can also use --all-databases&#41;
-    * -R For all routines &#40;stored procedures & triggers&#41;
-    * -E For all events
-    * --single-transaction Without locking the tables i.e., without interrupting any connection &#40;R/W&#41;
+* Linux
+ * Open a terminal of choice to execute the following dump command
+ * The following command will dump the content of the database to a file named with current date-time stamp
+ * NOTE: You will want to take a backup of the database with the mariadb 'root' user name, so you will need the root mariadb password to continue the SQL dump command
+ * You will be prompted to input the mariadb user name's password you entered into the dump command
+   * Dump for a certain database;
+     * NOTE: You will have to create your Database to import the dump back into the database as the command dumps everything inside the database to a file
+       * ````mysqldump -u <mariadb_user_name> -p <database_instance> -R -E --triggers --single-transaction > database_instance_`date +%Y-%m-%d_%H-%M-%S`.sql````
+   * Dump all databases
+     * ````mysqldump -u <mariadb_user_name> -p -A -R -E --triggers --single-transaction > database_instance_`date +%Y-%m-%d_%H-%M-%S`.sql````
+   * Flag meaning
+     * -A For all databases &#40;you can also use --all-databases&#41;
+     * -R For all routines &#40;stored procedures & triggers&#41;
+     * -E For all events
+     * --single-transaction without locking the tables i.e., without interrupting any connection &#40;R/W&#41;
+* Docker Container
+ * Open Docker container terminal to execute the following dump command
+  * The following command will dump the content of the database to a file named with the current date-time stamp
+  * NOTE: You will want to take a backup of the database with the mariadb 'root' user name, so you will need the root mariadb password to continue the SQL dump command
+  * You will be prompted to input the mariadb user name's password you entered into the dump command
+    * Dump for a certain database;
+      * NOTE: You will have to create your Database to import the dump back into the database as the command dumps everything inside the database to a file
+        * ````mariadb-dump -u <mariadb_root_user> -p <database_instance> -R -E --triggers --single-transaction > database_instance_`date +%Y-%m-%d_%H-%M-%S`.sql````
+    * Dump all databases
+      * ````mariadb-dump -u <mariadb_root_user> -p -A -R -E --triggers --single-transaction > database_instance_`date +%Y-%m-%d_%H-%M-%S`.sql````
+    * Flag meaning
+      * -A For all databases &#40;you can also use --all-databases&#41;
+      * -R For all routines &#40;stored procedures & triggers&#41;
+      * -E For all events
+      * --single-transaction without locking the tables i.e., without interrupting any connection &#40;R/W&#41;
 
 ### Check Export If It's A Legitimate SQL Dump File
 * `head -n 5 database_instance_dump.sql`
