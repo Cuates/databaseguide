@@ -59,6 +59,8 @@
 * [Procedures](#procedures)
 * [Procedure Drop](#procedure-drop)
 * [Procedure Execute](#procedure-execute)
+* [Delete User From Database Issue](#delete-user-from-database-issue)
+* [Check New User Permission](#check-new-user-permission)
 
 ### Version
 * 0.0.1
@@ -307,3 +309,50 @@
 
 ### Procedure Execute
 * `exec <tableschema>.<procedurename> @parameterone = '', ...;`
+
+### Delete User From Database Issue
+* If you have issues with deleting a user from the database then proceed with the following
+  * Issue with not able to delete user because they own a database
+    * Check what the user has ownership to
+      * <pre>
+          select
+          s.name
+          from sys.schemas s
+          where s.principal_id = user_id('user_name');
+        </pre>
+    * Assign dbo to owner of the database again
+      * <pre>
+          ALTER AUTHORIZATION ON SCHEMA::db_owner TO dbo;
+          ALTER AUTHORIZATION ON SCHEMA::db_datareader TO dbo;
+          ALTER AUTHORIZATION ON SCHEMA::db_datawriter TO dbo;
+        </pre>
+
+### Check New User Permission
+* Check new user's permission to make sure they are able to access the newly created database.
+  * Open Microsoft SQL Server Management Studio
+      * Sign in as a root user for the SQL server
+        * Expand the SQL server you just connected to
+          * Expand Database under the server you just connected to
+            * Expand Security under the database you expanded
+              * Expand Users under the database you expanded
+               * Right click on "Properties" for the newly created user
+                 * Provide new user with the following
+                   * Check
+                     * db_datareader
+                     * db_datawriter
+                     * db_owner
+                 * Adjust any other properties for the user that is needed
+                 * Click button "OK"
+        * Expand the SQL server you just connected to
+          * Expand Security under the server you just connected to
+            * Expand on "Logins"
+              * Right click on "Properties" for the newly created user
+                * Select the "User Mapping" tab
+                  * Select the database of choice in the "Users mapped to this login" panel
+                    * Make sure the user is inputted in the User section and the Default Schema is dbo
+                  * Provide new user with the following in the "Database role membership for: " section
+                   * Check
+                     * db_datareader
+                     * db_datawriter
+                     * db_owner
+                * Click button "OK"
