@@ -62,6 +62,7 @@
 * [Delete User From Database Issue](#delete-user-from-database-issue)
 * [Check New User Permission](#check-new-user-permission)
 * [Import](#import)
+* [Create New User Via GUI](#create-new-user-via-gui)
 
 ### Version
 * 0.0.1
@@ -394,3 +395,27 @@
         * Right click on "Databases"
           * Click "Refresh"
       * You have successfully imported your backup from your old SQL server
+
+### Create New User Via GUI
+* Create a user for the SQL server via GUI
+  * Open Microsoft SQL Server Management Studio
+    * Sign in as a root user for the SQL server
+      * Expand the SQL server you just connected to
+        * Expand Security under the server you just connected to
+          * Right click on "Logins"
+            * Click on "New Login..."
+              * Under the General tab perform the necessary changes
+                * Type the "Login name"
+                * Make sure the SQL Server authentication radio button is selected
+                  * Input password and confirm password
+                  * Uncheck
+                    * Enforce password policy
+                    * Enforce password expiration
+                    * User must change password at next login
+                * Make any necessary modification where needed
+                * Set Default database
+                * Set Default language
+              * Adjust anything else for any of the other tabs if needed
+              * Click button "OK" when you are done with the modifications
+  * Sign out of the current user
+  * Sign in as the newly created user to make sure everything worked
