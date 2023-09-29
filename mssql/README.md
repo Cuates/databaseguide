@@ -61,6 +61,7 @@
 * [Procedure Execute](#procedure-execute)
 * [Delete User From Database Issue](#delete-user-from-database-issue)
 * [Check New User Permission](#check-new-user-permission)
+* [Import](#import)
 
 ### Version
 * 0.0.1
@@ -356,3 +357,40 @@
                      * db_datawriter
                      * db_owner
                 * Click button "OK"
+
+### Import
+* Import
+  * The following is for a Linux MSSQL server
+    * Open a terminal of choice
+      * Sign into the linux server as root user
+        * Copy the .bak file you created when you exported the database to the following location '/var/opt/mssql/data'
+          * `cp ~/media.bak .`
+        * Adjust the permissions to the mssql user, this will allow the mssql user to interact with the backup file
+          * `chown mssql:mssql media.bak`
+  * Open Microsoft SQL Server Management Studio on Windows or any operating system that will open the SSMS application
+    * Sign in as a root user for the SQL server
+      * Expand the SQL server you just connected to
+        * Right click on "Databases"
+            * Click on "Restore Files and Filegroups"
+              * Under the General tab perform the necessary changes
+                * Type the "To database" name
+                * Select "From device" radio button
+                  * Click on the 3 dots to the right of the radio button
+                  * Make sure "Backup media type is "File"
+                  * Click button "Add"
+                  * Select the "data" folder in the tree structure
+                  * Select the backup of choice
+                    * Click button "OK"
+                  * Click button "OK"
+                * Check "Restore" of the backup you created earlier
+                  * You see which one to check, look at the "Start Date" and "Finish Date" columns for the latest backup
+              * Adjust anything else for any of the other tabs if needed
+              * Click button "OK" when you are done with the modifications
+              * Wait for the "Executing" to finish
+                * This may take some time depending on how much data was backup
+              * You will get a pop window stating
+                * "Database 'database_name' restored successfully."
+                  * Click button "OK"
+        * Right click on "Databases"
+          * Click "Refresh"
+      * You have successfully imported your backup from your old SQL server
