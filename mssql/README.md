@@ -61,6 +61,7 @@
 * [Procedure Execute](#procedure-execute)
 * [Delete User From Database Issue](#delete-user-from-database-issue)
 * [Check New User Permission](#check-new-user-permission)
+* [Backup](#backup)
 * [Import](#import)
 * [Create New User Via GUI](#create-new-user-via-gui)
 
@@ -358,6 +359,26 @@
                      * db_datawriter
                      * db_owner
                 * Click button "OK"
+### Backup
+* Open SSMS
+* Log into database with credentials of database ownership
+* Expand Databases
+* Right click database_instance
+  * Hover over Tasks
+  * Click Back Up...
+* General
+  * Source
+    * Database: database_instance
+    * Backup type: Full
+  * Destination
+    * Back up to: Disk
+    * /path/to/backup/
+* Backup Options
+  * Backup set
+    * Name: database_instance_backup_date_time
+    * Description: Optional
+* Click OK
+* NOTE: If you get a sector error, then remove the old bak file and start again
 
 ### Import
 * Import
