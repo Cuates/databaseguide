@@ -48,6 +48,7 @@
 * [Collation Version Mismatch](#collation-version-mismatch)
 * [Backup Database](#backup-database)
 * [Importing from a backup gz file](#importing-from-a-backup-gz-file)
+* [Major Upgrade Issue](#major-upgrade-issue)
 
 ### Version
 * 0.0.1
@@ -399,4 +400,13 @@
      * `gunzip -c filename.gz | psql <database_name>`
        * "-c" is to drop the database objects before recreating them
        * WAIT FOR THE PROCESS TO FINISH
-  * Your new postgresql database now has the old database backup imported 
+  * Your new postgresql database now has the old database backup imported
+
+### Major Upgrade Issue
+  * Docker Error
+    * PostgreSQL Database directory appears to contain a database; Skipping initialization
+    * [1] FATAL:  database files are incompatible with server
+    * DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 17.0 (Debian 17.0-1.pgdg120+1)
+  * Docker Resolution
+    * Create a bare-bones Postgres Docker container with the latest major version (NOTE: This error is going from 16 to 17)
+    * Steps 
