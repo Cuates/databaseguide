@@ -400,7 +400,7 @@
      * `gunzip -c filename.gz | psql <database_name>`
        * "-c" is to drop the database objects before recreating them
        * WAIT FOR THE PROCESS TO FINISH
-  * Your new postgresql database now has the old database backup imported
+  * Your new Postgresql database now has the old database backup imported
 
 ### Major Upgrade Issue
   * Docker Error
@@ -409,4 +409,5 @@
     * DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 17.0 (Debian 17.0-1.pgdg120+1)
   * Docker Resolution
     * Create a bare-bones Postgres Docker container with the latest major version (NOTE: This error is going from 16 to 17)
-    * Steps 
+    * Create config and data sub-directories
+    * Follow the steps above for importing from backup
