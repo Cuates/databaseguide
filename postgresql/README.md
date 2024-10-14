@@ -410,4 +410,4 @@
   * Docker Resolution
     * Create a bare-bones Postgres Docker container with the latest major version (NOTE: This error is going from 16 to 17)
     * Create config and data sub-directories
-    * Follow the steps above for importing from backup
+    * Follow the steps above for importing from backup with Docker contatiner
