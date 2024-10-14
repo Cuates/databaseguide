@@ -404,10 +404,13 @@
 
 ### Major Upgrade Issue
   * Docker Error
-    * PostgreSQL Database directory appears to contain a database; Skipping initialization
-    * [1] FATAL:  database files are incompatible with server
-    * DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 17.0 (Debian 17.0-1.pgdg120+1)
+    * <pre>
+        PostgreSQL Database directory appears to contain a database; Skipping initialization
+        [1] FATAL:  database files are incompatible with server
+        DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 17.0 (Debian 17.0-1.pgdg120+1)
+      </pre
   * Docker Resolution
-    * Create a bare-bones Postgres Docker container with the latest major version (NOTE: This error is going from 16 to 17)
-    * Create config and data sub-directories
-    * Follow the steps above for importing from backup with Docker contatiner
+    * IMPORTANT: Create a backup of the Postgres database
+    * Create a bare-bones Postgres Docker container with the latest major version (NOTE: This error was going from 16 to 17)
+    * Create the necessary config and data sub-directories in the docker container folder
+    * Follow the steps above for importing from the backup with the Docker container
