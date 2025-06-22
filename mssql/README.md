@@ -373,7 +373,10 @@
   * Destination
     * Back up to: Disk
     * /path/to/backup/
-* Backup Options
+      * Click button Add...
+      * /path/to/backup/database_instance_backup_date.bak
+      * Click button OK
+* Backup Options (Optional but not needed)
   * Backup set
     * Name: database_instance_backup_date_time
     * Description: Optional
